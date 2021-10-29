@@ -1,0 +1,12 @@
+# Dirs
+
+bin/
+bin-int/
+
+!**/premake5.exe
+
+.vs/
+
+# Files
+
+*.user

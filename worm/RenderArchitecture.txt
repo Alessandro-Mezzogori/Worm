@@ -1,0 +1,100 @@
+enum class RenderingApi{
+
+};
+
+class Input
+{
+public:
+}
+
+struct WindowProp
+{
+	// Physical properties
+	std::string name;
+	uint32_t width, height;
+
+	// Engine Properties
+};
+
+class Window
+{
+public:
+	RenderingApi* api;
+	Input* input;
+}
+
+struct RenderingFrame{
+	Window* handle;
+	RenderingApi* api;
+	RenderingContext* context;
+}
+
+class Renderer
+{
+public:
+	static void DrawVertexArray(VertexArray& va, Window* handle)
+	{
+		RenderThread::QueueCommand(RenderCommand::DrawVertexArray, rendering_info[handle], ...);
+	}
+private:
+	std::map<Window*, RenderingFrame> rendering_info; // dove Window* == RenderingFrame.handle
+}
+
+class RenderCommandInterface
+{
+public:
+	virtual operator()() = 0;
+}
+
+template <typename... Ts>
+class RenderCommand : public RenderCommandInterface{
+	private:
+    std::function<void(Ts...)> function_handler;
+    std::tuple<Ts...> function_arguments;
+    RenderingContext m_RenderingContext;
+private:
+    // Calls the function with the passed argument tuple
+    template <typename... Args, std::size_t... Is>
+    void call_function(std::tuple<Args...>& tup, helper::index<Is...> indices)
+    {
+    	// do stuff to with render context
+        function_handler(std::get<Is>(tup)...);
+    }
+
+    // 
+    template <typename... Args>
+    void call_function(std::tuple<Args...>& tup)
+    {
+        call_function(tup, helper::gen_seq<sizeof...(Args)>{});
+    }
+public:
+    // Creates the action and default argumens when called 
+    RenderCommand(std::function<void(Ts...)> func, Ts&&... args)
+        : function_handler(func), function_arguments(std::make_tuple(std::forward<Ts>(args)...))
+    {}
+
+    // calls the render command 
+    void operator()() override
+    {
+        call_function(function_arguments);
+    }
+
+}
+
+class RenderThread
+{
+public:
+	QueueCommand(std::shared_ptr<RenderCommandInterface> command){
+		m_Queue.push_back(command);
+	}
+
+	ProcessCommand()
+	{
+		std::shared_ptr<RenderCommand> command = m_Queue.Pop();
+		
+		// process render thread command	
+		command();	
+	}
+private:
+	QueueMT<std::shared_ptr<RenderCommandInterface>> m_Queue;
+}

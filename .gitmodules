@@ -1,0 +1,13 @@
+[submodule "worm/vendor/spdlog"]
+	path = worm/vendor/spdlog
+	url = https://github.com/gabime/spdlog
+[submodule "worm/vendor/glfw"]
+	path = worm/vendor/glfw
+	url = https://github.com/alessandro-mezzogori/glfw
+[submodule "worm/vendor/glm"]
+	path = worm/vendor/glm
+	url = https://github.com/g-truc/glm
+[submodule "worm/vendor/imgui"]
+	path = worm/vendor/imgui
+	url = https://github.com/Alessandro-Mezzogori/imgui
+	branch = docking
