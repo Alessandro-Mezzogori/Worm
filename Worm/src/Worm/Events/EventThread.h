@@ -1,8 +1,8 @@
 #pragma once
 
 #include <thread>
-#include "Worm/Core/Events/Event.h"
-#include "Worm/Core/DataStructures/QueueMT.h"
+#include "Worm/Events/Event.h"
+#include "Worm/DataStructures/QueueMT.h"
 
 namespace Worm {
 	class EventThread : public std::thread {

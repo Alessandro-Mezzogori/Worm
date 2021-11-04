@@ -2,7 +2,7 @@
 #include "Application.h"
 
 #include "Core.h"
-#include "Rendering/Renderer.h"
+#include "Worm/Rendering/Renderer.h"
 
 namespace Worm {
 	Application* Application::s_Instance = nullptr;
@@ -17,7 +17,7 @@ namespace Worm {
 		m_EventThread.reset(new EventThread(BIND_METHOD_CALLBACK<void, Application>(this, &Application::EventThreadLoop)));
 
 		m_Window = Window::Create();
-		m_Window->SetEventCallback(BIND_METHOD_CALLBACK<void, std::shared_ptr<BaseEvent>, Application>(this, &Application::QueueEvent));
+		m_Window->SetEventCallback(BIND_METHOD_CALLBACK<void, Shared<BaseEvent>, Application>(this, &Application::QueueEvent));
 
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);

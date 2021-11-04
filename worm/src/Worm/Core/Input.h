@@ -1,7 +1,7 @@
 #pragma once
 
 #include <utility>
-#include "Worm/Core/Events/Codes.h"
+#include "Worm/Events/Codes.h"
 
 namespace Worm {
 	class Input {

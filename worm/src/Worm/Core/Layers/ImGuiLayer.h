@@ -2,9 +2,9 @@
 
 #include "Worm/Core/ApplicationLayer.h"
 
-#include "Worm/Core/Events/ApplicationEvents.h"
-#include "Worm/Core/Events/KeyEvents.h"
-#include "Worm/Core/Events/MouseEvents.h"
+#include "Worm/Events/ApplicationEvents.h"
+#include "Worm/Events/KeyEvents.h"
+#include "Worm/Events/MouseEvents.h"
 
 namespace Worm {
 	class ImGuiLayer : public Layer

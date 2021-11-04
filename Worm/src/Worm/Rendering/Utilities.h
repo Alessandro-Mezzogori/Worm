@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Worm::Utils {
+namespace Worm {
 	struct RenderingViewport{
 		float x;
 		float y;

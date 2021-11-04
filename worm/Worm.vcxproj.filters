@@ -49,31 +49,31 @@
     <ClInclude Include="src\Worm\Core\Core.h">
       <Filter>Worm\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Worm\Core\DataStructures\QueueMT.h">
+    <ClInclude Include="src\Worm\DataStructures\QueueMT.h">
       <Filter>Worm\Core\DataStructures</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Core\EntryPoint.h">
       <Filter>Worm\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Worm\Core\Events\ApplicationEvents.h">
+    <ClInclude Include="src\Worm\Events\ApplicationEvents.h">
       <Filter>Worm\Core\Events</Filter>
     </ClInclude>
-    <ClInclude Include="src\Worm\Core\Events\Codes.h">
+    <ClInclude Include="src\Worm\Events\Codes.h">
       <Filter>Worm\Core\Events</Filter>
     </ClInclude>
-    <ClInclude Include="src\Worm\Core\Events\Event.h">
+    <ClInclude Include="src\Worm\Events\Event.h">
       <Filter>Worm\Core\Events</Filter>
     </ClInclude>
-    <ClInclude Include="src\Worm\Core\Events\EventThread.h">
+    <ClInclude Include="src\Worm\Events\EventThread.h">
       <Filter>Worm\Core\Events</Filter>
     </ClInclude>
-    <ClInclude Include="src\Worm\Core\Events\KeyEvents.h">
+    <ClInclude Include="src\Worm\Events\KeyEvents.h">
       <Filter>Worm\Core\Events</Filter>
     </ClInclude>
-    <ClInclude Include="src\Worm\Core\Events\MouseEvents.h">
+    <ClInclude Include="src\Worm\Events\MouseEvents.h">
       <Filter>Worm\Core\Events</Filter>
     </ClInclude>
-    <ClInclude Include="src\Worm\Core\Events\WindowEvents.h">
+    <ClInclude Include="src\Worm\Events\WindowEvents.h">
       <Filter>Worm\Core\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Core\Input.h">
@@ -85,25 +85,25 @@
     <ClInclude Include="src\Worm\Core\Log.h">
       <Filter>Worm\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Worm\Core\Rendering\Buffers.h">
+    <ClInclude Include="src\Worm\Rendering\Buffers.h">
       <Filter>Worm\Core\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="src\Worm\Core\Rendering\Renderer.h">
+    <ClInclude Include="src\Worm\Rendering\Renderer.h">
       <Filter>Worm\Core\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="src\Worm\Core\Rendering\RenderingAPI.h">
+    <ClInclude Include="src\Worm\Rendering\RenderingAPI.h">
       <Filter>Worm\Core\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="src\Worm\Core\Rendering\RenderingAPIController.h">
+    <ClInclude Include="src\Worm\Rendering\RenderingAPIController.h">
       <Filter>Worm\Core\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="src\Worm\Core\Rendering\Shader.h">
+    <ClInclude Include="src\Worm\Rendering\Shader.h">
       <Filter>Worm\Core\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="src\Worm\Core\Rendering\Utilities.h">
+    <ClInclude Include="src\Worm\Rendering\Utilities.h">
       <Filter>Worm\Core\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="src\Worm\Core\Rendering\VertexArray.h">
+    <ClInclude Include="src\Worm\Rendering\VertexArray.h">
       <Filter>Worm\Core\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Core\Window.h">
@@ -128,15 +128,16 @@
       <Filter>Worm\Platform\RenderingApi\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\wormpch.h" />
+    <ClInclude Include="src\Worm\Rendering\OrthographicCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Worm\Core\Application.cpp">
       <Filter>Worm\Core</Filter>
     </ClCompile>
-    <ClCompile Include="src\Worm\Core\DataStructures\QueueMT.cpp">
+    <ClCompile Include="src\Worm\DataStructures\QueueMT.cpp">
       <Filter>Worm\Core\DataStructures</Filter>
     </ClCompile>
-    <ClCompile Include="src\Worm\Core\Events\Event.cpp">
+    <ClCompile Include="src\Worm\Events\Event.cpp">
       <Filter>Worm\Core\Events</Filter>
     </ClCompile>
     <ClCompile Include="src\Worm\Core\Layers\ImGuiBuild.cpp">
@@ -148,10 +149,10 @@
     <ClCompile Include="src\Worm\Core\Log.cpp">
       <Filter>Worm\Core</Filter>
     </ClCompile>
-    <ClCompile Include="src\Worm\Core\Rendering\Renderer.cpp">
+    <ClCompile Include="src\Worm\Rendering\Renderer.cpp">
       <Filter>Worm\Core\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="src\Worm\Core\Rendering\RenderingAPIController.cpp">
+    <ClCompile Include="src\Worm\Rendering\RenderingAPIController.cpp">
       <Filter>Worm\Core\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="src\Worm\Core\Window.cpp">

@@ -5,15 +5,15 @@
 #include "Worm/Core/Core.h"
 #include "Worm/Core/Window.h"
 
-#include "Worm/Core/Rendering/RenderingAPIController.h"
-#include "Worm/Core/Rendering/Utilities.h"
+#include "Worm/Rendering/RenderingAPIController.h"
+#include "Worm/Rendering/Utilities.h"
 
 namespace Worm {
 	struct RenderingFrame {
-		Utils::RenderingViewport renderingViewport;
+		RenderingViewport renderingViewport;
 		Shared<RenderingAPI> renderingApi;	
 
-		RenderingFrame(RenderingAPIController::API api, Utils::RenderingViewport viewport = Utils::RenderingViewport()) :
+		RenderingFrame(RenderingAPIController::API api, RenderingViewport viewport = RenderingViewport()) :
 			renderingApi(RenderingAPIController::LoadAPI(api)), renderingViewport(viewport)
 		{
 		}
@@ -21,7 +21,7 @@ namespace Worm {
 		RenderingFrame()
 		{
 			renderingApi = nullptr;
-			renderingViewport = Utils::RenderingViewport();
+			renderingViewport = RenderingViewport();
 		}
 	};
 

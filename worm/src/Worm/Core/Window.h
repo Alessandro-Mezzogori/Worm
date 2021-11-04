@@ -1,6 +1,7 @@
 #pragma once
 
-#include "Events/Event.h"
+#include "Worm/Core/Core.h"
+#include "Worm/Events/Event.h"
 #include "Input.h"
 
 namespace Worm {
@@ -24,7 +25,7 @@ namespace Worm {
 	//
 	class Window {
 	public:
-		using EventCallbackFn = std::function<void(std::shared_ptr<BaseEvent>)>;
+		using EventCallbackFn = std::function<void(Shared<BaseEvent>)>;
 	public:
 		virtual ~Window() {}
 

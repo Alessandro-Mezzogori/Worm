@@ -1,13 +1,13 @@
 #pragma once
 
 #include "Window.h"
-#include "Events/Event.h"
-#include "Events/WindowEvents.h"
+#include "Worm/Events/Event.h"
+#include "Worm/Events/WindowEvents.h"
 
 #include "Worm/Core/ApplicationLayerStack.h"
 #include "Worm/Core/Layers/ImGuiLayer.h"
 
-#include "Worm/Core/Events/EventThread.h"
+#include "Worm/Events/EventThread.h"
 
 namespace Worm {
 	//

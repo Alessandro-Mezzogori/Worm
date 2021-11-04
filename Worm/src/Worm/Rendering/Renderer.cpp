@@ -19,7 +19,7 @@ namespace Worm {
 	void Renderer::UseRenderingFrame(RenderingFrame frame) {
 		s_ActiveFrame = frame;
 
-		Utils::RenderingViewport vp = s_ActiveFrame.renderingViewport;
+		RenderingViewport vp = s_ActiveFrame.renderingViewport;
 		s_ActiveFrame.renderingApi->SetViewport(vp.x, vp.y, vp.width, vp.height);
 	}
 

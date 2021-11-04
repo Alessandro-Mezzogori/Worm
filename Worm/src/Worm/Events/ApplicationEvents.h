@@ -2,7 +2,7 @@
 
 #include <sstream>
 
-#include "Worm/Core/Events/Event.h"
+#include "Worm/Events/Event.h"
 
 
 namespace Worm {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Worm/Core/Rendering/Buffers.h"
+#include "Worm/Rendering/Buffers.h"
 
 namespace Worm{
 	class OpenGLVertexBuffer : public VertexBuffer{

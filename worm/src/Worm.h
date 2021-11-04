@@ -16,7 +16,7 @@
 
 // -- Rendering API ---------------------------------------
 
-#include "Worm/Core/Rendering/Renderer.h"
+#include "Worm/Rendering/Renderer.h"
 
 // -- Entry Point -----------------------------------------
 
@@ -24,8 +24,8 @@
 
 // -- Event API -------------------------------------------
 
-#include "Worm/Core/Events/Event.h"
-#include "Worm/Core/Events/ApplicationEvents.h"
-#include "Worm/Core/Events/KeyEvents.h"
-#include "Worm/Core/Events/WindowEvents.h"
-#include "Worm/Core/Events/MouseEvents.h"
+#include "Worm/Events/Event.h"
+#include "Worm/Events/ApplicationEvents.h"
+#include "Worm/Events/KeyEvents.h"
+#include "Worm/Events/WindowEvents.h"
+#include "Worm/Events/MouseEvents.h"

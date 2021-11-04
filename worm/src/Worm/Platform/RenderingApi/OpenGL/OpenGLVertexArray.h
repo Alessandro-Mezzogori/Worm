@@ -4,7 +4,7 @@
 
 #include "Worm/Core/Core.h"
 
-#include "Worm/Core/Rendering/VertexArray.h"
+#include "Worm/Rendering/VertexArray.h"
 
 namespace Worm{
 

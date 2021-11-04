@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Worm/Core/Core.h"
-#include "Worm/Core/Rendering/Shader.h"
+#include "Worm/Rendering/Shader.h"
 
 namespace Worm {
 	class OpenGLShader : public Shader {

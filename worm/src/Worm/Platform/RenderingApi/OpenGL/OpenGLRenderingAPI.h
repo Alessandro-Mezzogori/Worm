@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Worm/Core/Rendering/RenderingAPI.h"
+#include "Worm/Rendering/RenderingAPI.h"
 
 namespace Worm {
 	class OpenGLRenderingAPI : public RenderingAPI {
