@@ -28,6 +28,10 @@ public:
 
 	Shared<VertexArray> m_VertexArray;
 	Shared<Shader> m_Shader;
+	Shared<Shader> m_Shader2;
+
+	RenderingFrame m_Frame;
+	RenderingFrame m_Frame2;
 
 	ExampleLayer()
 	{
@@ -41,7 +45,8 @@ public:
 			0, 1, 2
 		};
 
-		//Renderer::UseRenderingFrame(RenderingFrame(RenderingAPIController::API::OPENGL, { 0.0f, 0.0f, 1.0f, 1.0f }));
+		m_Frame = RenderingFrame({ 0.0f, 0.0f, 0.5f, 1.0f });
+		m_Frame2 = RenderingFrame(ViewportUtils::GetHorizontalComplementaryViewport(m_Frame.renderingViewport));
 
 		m_VertexArray = Worm::CreateSharedResource<OpenGLVertexArray>();
 		m_VertexArray->Bind();
@@ -83,7 +88,19 @@ public:
 			}
 		)";
 
+		const char* fragmentShaderSource2 = R"(#version 330 core
+			out vec4 FragColor;
+			
+			in vec3 Position;
+			
+			void main()
+			{
+				FragColor = vec4(0.5f, 0.5f, 0.3f, 1.0f);
+			}
+		)";
+
 		m_Shader = CreateSharedResource<OpenGLShader>(vertexShaderSource, fragmentShaderSource);
+		m_Shader2 = CreateSharedResource<OpenGLShader>(vertexShaderSource, fragmentShaderSource2);
 	}
 
 	virtual void OnEvent(std::shared_ptr<Worm::BaseEvent> e) override {
@@ -92,13 +109,23 @@ public:
 
 	virtual void OnUpdate() override 
 	{
-		Renderer::ClearColor({ 0.2f, 0.3f, 0.3f, 1.0f });
-		Renderer::ClearFrame();
+		Renderer::BeginScene(Environment(), Camera());
 
+		Renderer::SetActiveRenderingFrame(m_Frame);
+		RenderCommand::ClearColor({ 0.2f, 0.3f, 0.3f, 1.0f });
+		RenderCommand::ClearFrame();
 		m_Shader->Activate();
 		m_VertexArray->Bind();
+		Renderer::Submit(*m_VertexArray);
 
-		Renderer::RenderVertexArray(*m_VertexArray);
+		Renderer::SetActiveRenderingFrame(m_Frame2);
+		RenderCommand::ClearColor({ 0.2f, 0.3f, 0.3f, 1.0f });
+		RenderCommand::ClearFrame();
+		m_Shader2->Activate();
+		m_VertexArray->Bind();
+		Renderer::Submit(*m_VertexArray);
+
+		Renderer::EndScene();
 	}
 
 	virtual void OnImGuiRender() override {

@@ -17,6 +17,7 @@
 // -- Rendering API ---------------------------------------
 
 #include "Worm/Rendering/Renderer.h"
+#include "Worm/Rendering/RenderCommand.h"
 
 // -- Entry Point -----------------------------------------
 

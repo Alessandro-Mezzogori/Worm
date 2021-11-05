@@ -17,6 +17,7 @@ IncludeDirs["GLFW"] = "Worm/vendor/GLFW/include"
 IncludeDirs["Glad"] = "Worm/vendor/Glad/include"
 IncludeDirs["ImGui"] = "Worm/vendor/imgui"
 IncludeDirs["glm"] = "Worm/vendor/glm"
+IncludeDirs["spirv_cross"] = "Worm/vendor/spirv-cross"
 
 -- Include the IndluceDirs premake files
 group "Dependencies"
@@ -54,7 +55,8 @@ project "Worm"
             "%{IncludeDirs.GLFW}",
             "%{IncludeDirs.Glad}",
             "%{IncludeDirs.ImGui}",
-            "%{IncludeDirs.glm}"
+            "%{IncludeDirs.glm}",
+            "%{IncludeDirs.spirv_cross}"
     }
 
     links

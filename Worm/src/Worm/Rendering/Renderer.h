@@ -1,40 +1,44 @@
 #pragma once
 
-#include<vector>
+#include<stack>
 
 #include "Worm/Core/Core.h"
 #include "Worm/Core/Window.h"
 
-#include "Worm/Rendering/RenderingAPIController.h"
 #include "Worm/Rendering/Utilities.h"
+
+#include "Worm/Rendering/VertexArray.h"
 
 namespace Worm {
 	struct RenderingFrame {
 		RenderingViewport renderingViewport;
-		Shared<RenderingAPI> renderingApi;	
-
-		RenderingFrame(RenderingAPIController::API api, RenderingViewport viewport = RenderingViewport()) :
-			renderingApi(RenderingAPIController::LoadAPI(api)), renderingViewport(viewport)
+		
+		RenderingFrame(RenderingViewport viewport = RenderingViewport()) :
+			renderingViewport(viewport)
 		{
-		}
-
-		RenderingFrame()
-		{
-			renderingApi = nullptr;
-			renderingViewport = RenderingViewport();
 		}
 	};
 
+	struct Environment {
+
+	};
+
+	struct Camera {
+
+	};
 
 	class Renderer {
 	public:
-		static void RenderVertexArray(const VertexArray& vertexArray);
+		static void BeginScene(Environment env, Camera camera); 
+		static void EndScene();
+		static void FlushScene();
 
-		static void ClearColor(const glm::vec4& color);
-		static void ClearFrame();
+		static void Submit(const VertexArray& vertexArray);
 
-		static void UseRenderingFrame(RenderingFrame frame);
+		static void SetActiveRenderingFrame(RenderingFrame frame);
+		static RenderingFrame& GetActiveRenderingFrame();
 		static void INIT();
+
 	private:
 		static RenderingFrame s_ActiveFrame;
 	};

@@ -1,31 +1,49 @@
 #include "wormpch.h"
 #include "Renderer.h"
 
+#include "RenderCommand.h"
+
 namespace Worm {
 	RenderingFrame Renderer::s_ActiveFrame = RenderingFrame();
 
-	void Renderer::RenderVertexArray(const VertexArray& vertexArray) {
-		s_ActiveFrame.renderingApi->RenderVertexArray(vertexArray);
+	// ##### SCENE CONTROLS FUNTIONS #####
+
+	void Renderer::BeginScene(Environment env, Camera camera)
+	{
+		
 	}
 
-	void Renderer::ClearColor(const glm::vec4& color) {
-		s_ActiveFrame.renderingApi->ClearColor(color);
+	void Renderer::EndScene()
+	{
 	}
 
-	void Renderer::ClearFrame() {
-		s_ActiveFrame.renderingApi->ClearFrame();
+	void Renderer::FlushScene()
+	{
 	}
 
-	void Renderer::UseRenderingFrame(RenderingFrame frame) {
+	// ##### RENDERING OBJECTS FUNCTIONS ######
+
+	void Renderer::Submit(const VertexArray& vertexArray) {
+		RenderCommand::RenderIndexed(vertexArray);
+	}
+
+	// ##### ENVIRONMENT FUNCTIONS ######
+
+	void Renderer::SetActiveRenderingFrame(RenderingFrame frame) {
 		s_ActiveFrame = frame;
 
 		RenderingViewport vp = s_ActiveFrame.renderingViewport;
-		s_ActiveFrame.renderingApi->SetViewport(vp.x, vp.y, vp.width, vp.height);
+		RenderCommand::SetViewport(vp.x, vp.y, vp.width, vp.height);
+	}
+
+	RenderingFrame& Renderer::GetActiveRenderingFrame() {
+		return s_ActiveFrame;
 	}
 
 	void Renderer::INIT() {
 		RenderingAPIController::INIT();
+		RenderCommand::INIT();
 
-		s_ActiveFrame = RenderingFrame(RenderingAPIController::API::DEFAULT);
+		s_ActiveFrame = RenderingFrame();
 	}
 }

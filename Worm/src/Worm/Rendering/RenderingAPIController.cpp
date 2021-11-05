@@ -4,33 +4,37 @@
 #include "Worm/Platform/RenderingApi/OpenGL/OpenGLRenderingAPI.h"
 
 namespace Worm {
-    // ##### STATIC INITIALIZATION #####
+    // ##### STATIC INITIALIZATION/DECLARATION #####
 
-    std::unordered_map<RenderingAPIController::API, Shared<RenderingAPI>> RenderingAPIController::s_LoadedApi;
+    std::unordered_map<RenderingAPI::API, Unique<RenderingAPI>> RenderingAPIController::s_LoadedApi;
 
     // ##### PUBLIC METHODS #####
 
-    Shared<RenderingAPI> RenderingAPIController::LoadAPI(API api)
+    /*
+    * Returns a pointer to the requested RenderingAPI
+    */
+    const RenderingAPI* RenderingAPIController::GetAPI(RenderingAPI::API api)
     {
-        if (s_LoadedApi.contains(api)) 
-            return s_LoadedApi[api];
-    
+        if (!s_LoadedApi.contains(api)) 
+            LoadAPI(api);
+        
+        return s_LoadedApi[api].get();
+    }
+
+    void RenderingAPIController::LoadAPI(RenderingAPI::API api) {
+        
+        // Create the RenderingAPI handler for the requested api
         switch (api)
         {
-        case Worm::RenderingAPIController::API::OPENGL:
-            s_LoadedApi[api] = CreateSharedResource<OpenGLRenderingAPI>();
-            break;
-        default:
-            s_LoadedApi[api] = CreateSharedResource<OpenGLRenderingAPI>();
-            break;
+        case Worm::RenderingAPI::API::OPENGL: s_LoadedApi[api] = CreateUniqueResource<OpenGLRenderingAPI>(); break;
+        default: s_LoadedApi[api] = CreateUniqueResource<OpenGLRenderingAPI>(); break;
         }
 
-         s_LoadedApi[api]->Init();
-
-        return s_LoadedApi[api];
+        // Initiliaze the requested api
+        s_LoadedApi[api]->Init();
     }
 
     void RenderingAPIController::INIT() {
-        s_LoadedApi = std::unordered_map <RenderingAPIController::API, Shared<RenderingAPI>>();
+        s_LoadedApi = std::unordered_map <RenderingAPI::API, Unique<RenderingAPI>>();
     }
 }
