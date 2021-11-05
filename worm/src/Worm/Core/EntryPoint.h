@@ -4,6 +4,7 @@
 
 extern Worm::Application* Worm::CreateApplication();
 
+
 int main(int argc, char** argv)
 {
 	Worm::Log::INIT();
@@ -17,6 +18,7 @@ int main(int argc, char** argv)
 	return 0;
 }
 
+
 #else 
-#error Worm only supports Windows 64x
+    #error Worm only supports Windows 64x
 #endif 

@@ -18,6 +18,12 @@ IncludeDirs["Glad"] = "Worm/vendor/Glad/include"
 IncludeDirs["ImGui"] = "Worm/vendor/imgui"
 IncludeDirs["glm"] = "Worm/vendor/glm"
 IncludeDirs["spirv_cross"] = "Worm/vendor/spirv-cross"
+--IncludeDirs["vulkan"] = "C:/VulkanSDK/1.2.170.0/Include"
+IncludeDirs["vulkan"] = "$(VULKAN_SDK)/Include"
+
+LibDirs = {}
+--LibDirs["vulkan"] = "C:/VulkanSDK/1.2.170.0/Lib"
+LibDirs["vulkan"] = "$(VULKAN_SDK)/Lib"
 
 -- Include the IndluceDirs premake files
 group "Dependencies"
@@ -56,7 +62,13 @@ project "Worm"
             "%{IncludeDirs.Glad}",
             "%{IncludeDirs.ImGui}",
             "%{IncludeDirs.glm}",
-            "%{IncludeDirs.spirv_cross}"
+            "%{IncludeDirs.spirv_cross}",
+            "%{IncludeDirs.vulkan}"
+    }
+
+    libdirs 
+    {
+            "%{LibDirs.vulkan}"
     }
 
     links
@@ -64,7 +76,8 @@ project "Worm"
         "GLFW",
         "GLAD",
         "ImGui",
-        "opengl32.lib"
+        "opengl32.lib",
+        "vulkan-1.lib"
     }
 
     filter "system:windows"

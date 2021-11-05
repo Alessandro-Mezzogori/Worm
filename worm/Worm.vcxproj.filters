@@ -31,6 +31,9 @@
     <Filter Include="Worm\Platform\RenderingApi\OpenGL">
       <UniqueIdentifier>{39178E35-A585-E3B4-EE6E-9EB45A1CD950}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Worm\Platform\RenderingApi\Vulkan">
+      <UniqueIdentifier>{857B4046-F1E9-95C5-3AD3-50C5A6808B61}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Worm\Rendering">
       <UniqueIdentifier>{97393B76-8307-2F7C-6C9B-9FA258080BE1}</UniqueIdentifier>
     </Filter>
@@ -106,10 +109,16 @@
     <ClInclude Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLVertexArray.h">
       <Filter>Worm\Platform\RenderingApi\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="src\Worm\Platform\RenderingApi\Vulkan\VulkanRenderingAPI.h">
+      <Filter>Worm\Platform\RenderingApi\Vulkan</Filter>
+    </ClInclude>
     <ClInclude Include="src\Worm\Rendering\Buffers.h">
       <Filter>Worm\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Rendering\OrthographicCamera.h">
+      <Filter>Worm\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Worm\Rendering\RenderCommand.h">
       <Filter>Worm\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Rendering\Renderer.h">
@@ -140,7 +149,6 @@
       <Filter>Worm\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\wormpch.h" />
-    <ClInclude Include="src\Worm\Rendering\RenderCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Worm\Core\Application.cpp">
@@ -182,6 +190,12 @@
     <ClCompile Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLVertexArray.cpp">
       <Filter>Worm\Platform\RenderingApi\OpenGL</Filter>
     </ClCompile>
+    <ClCompile Include="src\Worm\Platform\RenderingApi\Vulkan\VulkanRenderingAPI.cpp">
+      <Filter>Worm\Platform\RenderingApi\Vulkan</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Worm\Rendering\RenderCommand.cpp">
+      <Filter>Worm\Rendering</Filter>
+    </ClCompile>
     <ClCompile Include="src\Worm\Rendering\Renderer.cpp">
       <Filter>Worm\Rendering</Filter>
     </ClCompile>
@@ -189,6 +203,5 @@
       <Filter>Worm\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="src\wormpch.cpp" />
-    <ClCompile Include="src\Worm\Rendering\RenderCommand.cpp" />
   </ItemGroup>
 </Project>

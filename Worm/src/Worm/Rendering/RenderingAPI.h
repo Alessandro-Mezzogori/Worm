@@ -11,8 +11,9 @@ namespace Worm {
 	class RenderingAPI {
 	public:
 		enum class API {
-			OPENGL,
 			DEFAULT,
+			OPENGL,
+			VULKAN,
 		};
 	public:
 		virtual void Init() = 0;

@@ -1,7 +1,7 @@
 #include "wormpch.h"
 #include "WindowsWindow.h"
 
-#include "GLFW/glfw3.h"
+#include <GLFW/glfw3.h>
 
 #include "Worm/Events/Event.h"
 #include "Worm/Events/ApplicationEvents.h"

@@ -2,6 +2,7 @@
 #include "RenderingAPIController.h"
 
 #include "Worm/Platform/RenderingApi/OpenGL/OpenGLRenderingAPI.h"
+#include "Worm/Platform/RenderingApi/Vulkan/VulkanRenderingAPI.h"
 
 namespace Worm {
     // ##### STATIC INITIALIZATION/DECLARATION #####
@@ -26,8 +27,9 @@ namespace Worm {
         // Create the RenderingAPI handler for the requested api
         switch (api)
         {
-        case Worm::RenderingAPI::API::OPENGL: s_LoadedApi[api] = CreateUniqueResource<OpenGLRenderingAPI>(); break;
-        default: s_LoadedApi[api] = CreateUniqueResource<OpenGLRenderingAPI>(); break;
+        case Worm::RenderingAPI::API::OPENGL: s_LoadedApi[api] = CreateUniqueResource<OpenGLRenderingAPI>(); WORM_LOG_CORE_TRACE("Loading OpenGL RenderingAPI"); break;
+        case Worm::RenderingAPI::API::VULKAN: s_LoadedApi[api] = CreateUniqueResource<VulkanRenderingAPI>(); WORM_LOG_CORE_TRACE("Loading Vulkan RenderingAPI"); break;
+        default: s_LoadedApi[api] = CreateUniqueResource<OpenGLRenderingAPI>(); WORM_LOG_CORE_TRACE("Loading Default RenderingAPI ( Vulkan )"); break;
         }
 
         // Initiliaze the requested api
