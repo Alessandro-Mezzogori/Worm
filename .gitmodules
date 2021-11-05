@@ -11,3 +11,6 @@
 	path = worm/vendor/imgui
 	url = https://github.com/Alessandro-Mezzogori/imgui
 	branch = docking
+[submodule "worm/vendor/spirv-cross"]
+	path = worm/vendor/spirv-cross
+	url = https://github.com/KhronosGroup/SPIRV-Cross
