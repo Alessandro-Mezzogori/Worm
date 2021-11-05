@@ -149,6 +149,11 @@
       <Filter>Worm\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\wormpch.h" />
+    <ClInclude Include="src\Worm\Rendering\Framebuffer.h" />
+    <ClInclude Include="src\Worm\Rendering\Renderbuffer.h" />
+    <ClInclude Include="src\Worm\Rendering\Texture.h" />
+    <ClInclude Include="src\Worm\Rendering\UniformBuffer.h" />
+    <ClInclude Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLUniformBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Worm\Core\Application.cpp">
@@ -203,5 +208,6 @@
       <Filter>Worm\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="src\wormpch.cpp" />
+    <ClCompile Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLUniformBuffer.cpp" />
   </ItemGroup>
 </Project>

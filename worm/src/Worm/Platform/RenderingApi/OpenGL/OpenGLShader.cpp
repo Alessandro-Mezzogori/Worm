@@ -59,4 +59,49 @@ namespace Worm {
 		glUseProgram(m_ID);
 	}
 
+	int32_t OpenGLShader::GetUniformBlockBinding(std::string_view name) const
+	{
+		GLint result;
+		GLuint block_index = glGetUniformBlockIndex(m_ID, name.data());
+		glGetActiveUniformBlockiv(m_ID, block_index, GL_UNIFORM_BLOCK_BINDING, &result);
+
+		return static_cast<int32_t>(result);
+	}
+
+	void OpenGLShader::LoadUniform(std::string_view name, int value) const
+	{
+		GLint location = glGetUniformLocation(m_ID, name.data());
+		glUniform1iv(location, 1, &value);
+	}
+
+	void OpenGLShader::LoadUniform(std::string_view name, float value) const
+	{
+		GLint location = glGetUniformLocation(m_ID, name.data());
+		glUniform1fv(location, 1, &value);
+	}
+
+	void OpenGLShader::LoadUniform(std::string_view name, glm::vec3 value) const
+	{
+		GLint location = glGetUniformLocation(m_ID, name.data());
+		glUniform3fv(location, 1, glm::value_ptr(value));
+	}
+
+	void OpenGLShader::LoadUniform(std::string_view name, glm::vec4 value) const
+	{
+		GLint location = glGetUniformLocation(m_ID, name.data());
+		glUniform4fv(location, 1, glm::value_ptr(value));
+	}
+
+	void OpenGLShader::LoadUniform(std::string_view name, glm::mat3 value, bool transpose) const
+	{
+		GLint location = glGetUniformLocation(m_ID, name.data());
+		glUniformMatrix3fv(location, 1, transpose ? GL_TRUE : GL_FALSE, glm::value_ptr(value));
+	}
+
+	void OpenGLShader::LoadUniform(std::string_view name, glm::mat4 value, bool transpose) const
+	{
+		GLint location = glGetUniformLocation(m_ID, name.data());
+		glUniformMatrix4fv(location, 1, transpose ? GL_TRUE : GL_FALSE, glm::value_ptr(value));
+	}
+
 }

@@ -166,10 +166,13 @@
     <ClInclude Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLBuffers.h" />
     <ClInclude Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLRenderingAPI.h" />
     <ClInclude Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLShader.h" />
+    <ClInclude Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLUniformBuffer.h" />
     <ClInclude Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="src\Worm\Platform\RenderingApi\Vulkan\VulkanRenderingAPI.h" />
     <ClInclude Include="src\Worm\Rendering\Buffers.h" />
+    <ClInclude Include="src\Worm\Rendering\Framebuffer.h" />
     <ClInclude Include="src\Worm\Rendering\OrthographicCamera.h" />
+    <ClInclude Include="src\Worm\Rendering\Renderbuffer.h" />
     <ClInclude Include="src\Worm\Rendering\RenderCommand.h" />
     <ClInclude Include="src\Worm\Rendering\Renderer.h" />
     <ClInclude Include="src\Worm\Rendering\RenderingAPI.h" />
@@ -177,6 +180,8 @@
     <ClInclude Include="src\Worm\Rendering\Shader.h" />
     <ClInclude Include="src\Worm\Rendering\ShaderController.h" />
     <ClInclude Include="src\Worm\Rendering\ShaderTypes.h" />
+    <ClInclude Include="src\Worm\Rendering\Texture.h" />
+    <ClInclude Include="src\Worm\Rendering\UniformBuffer.h" />
     <ClInclude Include="src\Worm\Rendering\UniformTable.h" />
     <ClInclude Include="src\Worm\Rendering\Utilities.h" />
     <ClInclude Include="src\Worm\Rendering\VertexArray.h" />
@@ -195,6 +200,7 @@
     <ClCompile Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLBuffers.cpp" />
     <ClCompile Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLRenderingAPI.cpp" />
     <ClCompile Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLShader.cpp" />
+    <ClCompile Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLUniformBuffer.cpp" />
     <ClCompile Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\Worm\Platform\RenderingApi\Vulkan\VulkanRenderingAPI.cpp" />
     <ClCompile Include="src\Worm\Rendering\RenderCommand.cpp" />

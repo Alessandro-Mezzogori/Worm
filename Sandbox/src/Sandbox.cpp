@@ -6,6 +6,7 @@
 #include "Worm/Platform/RenderingApi/OpenGL/OpenGLBuffers.h"
 #include "Worm/Platform/RenderingApi/OpenGL/OpenGLVertexArray.h"
 #include "Worm/Platform/RenderingApi/OpenGL/OpenGLShader.h"
+#include "Worm/Platform/RenderingApi/OpenGL/OpenGLUniformBuffer.h"
 
 #include "imgui/imgui.h"
 
@@ -65,8 +66,7 @@ public:
 
 		// Shaders 
 
-		const char* vertexShaderSource = R"(
-			#version 330 core
+		const char* vertexShaderSource = R"(#version 430 core
 			layout (location = 0) in vec3 aPos;
 
 			out vec3 Position;
@@ -77,18 +77,23 @@ public:
 				Position = aPos;
 			}
 		)";
-		const char* fragmentShaderSource = R"(#version 330 core
+		const char* fragmentShaderSource = R"(#version 430 core
 			out vec4 FragColor;
 
 			in vec3 Position;
 
+			layout(std140, binding = 1) uniform TestBlock
+			{
+				vec3 u_Color;
+			};
+
 			void main()
 			{
-			   FragColor = vec4(Position, 1.0f);
+			   FragColor = vec4(u_Color, 1.0f);
 			}
 		)";
 
-		const char* fragmentShaderSource2 = R"(#version 330 core
+		const char* fragmentShaderSource2 = R"(#version 430 core
 			out vec4 FragColor;
 			
 			in vec3 Position;
@@ -121,7 +126,8 @@ public:
 		Renderer::SetActiveRenderingFrame(m_Frame2);
 		RenderCommand::ClearColor({ 0.2f, 0.3f, 0.3f, 1.0f });
 		RenderCommand::ClearFrame();
-		m_Shader2->Activate();
+		m_Shader->Activate();
+		m_Shader->LoadUniform("u_Color", { 0.0f, 1.0f, 0.0f });
 		m_VertexArray->Bind();
 		Renderer::Submit(*m_VertexArray);
 
