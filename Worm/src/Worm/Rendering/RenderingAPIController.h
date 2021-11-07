@@ -13,13 +13,14 @@ namespace Worm{
 		* Loads and returns a const reference to the requested RenderingAPI
 		* ( The ownership of the RenderingAPI object is of the Controller )
 		*/
-		static const RenderingAPI* GetAPI(RenderingAPI::API api);
+		static const RenderingAPI* GetAPIimpl();
+		static RenderingAPI::API GetAPI();
+		static void LoadAPI(RenderingAPI::API api);
 		static void INIT();
 	private:
-		static void LoadAPI(RenderingAPI::API api);
-	private:
 		// TODO get rid of map if there's won't be any hot swappable rendering api ( turning the controller into a simple factory )
-		static std::unordered_map <RenderingAPI::API, Unique<RenderingAPI>> s_LoadedApi;
+		static RenderingAPI::API s_LoadedAPItype;
+		static Unique<RenderingAPI> s_LoadedAPI;
 	};
 
 }

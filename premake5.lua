@@ -12,12 +12,16 @@ workspace "Worm"
 outputdir = "%{cfg.buildcgf}-%{cfg.system}-%{cfg.architecture}"
 
 -- Include directories relative to root folder ( Solutino folder)
+MainProjectName = "Worm"
+
 IncludeDirs = {}
-IncludeDirs["GLFW"] = "Worm/vendor/GLFW/include"
-IncludeDirs["Glad"] = "Worm/vendor/Glad/include"
-IncludeDirs["ImGui"] = "Worm/vendor/imgui"
-IncludeDirs["glm"] = "Worm/vendor/glm"
-IncludeDirs["spirv_cross"] = "Worm/vendor/spirv-cross"
+IncludeDirs["spdlog"] = MainProjectName .. "/vendor/spdlog/include"
+IncludeDirs["GLFW"] = MainProjectName .. "/vendor/GLFW/include"
+IncludeDirs["Glad"] = MainProjectName .. "/vendor/Glad/include"
+IncludeDirs["ImGui"] = MainProjectName .. "/vendor/imgui"
+IncludeDirs["glm"] = MainProjectName .. "/vendor/glm"
+IncludeDirs["spirv_cross"] = MainProjectName .. "/vendor/spirv-cross"
+IncludeDirs["stb_image"] = MainProjectName .. "/vendor/stb_image"
 --IncludeDirs["vulkan"] = "C:/VulkanSDK/1.2.170.0/Include"
 IncludeDirs["vulkan"] = "$(VULKAN_SDK)/Include"
 
@@ -57,13 +61,14 @@ project "Worm"
     includedirs
     {
             "%{prj.name}/src",
-            "%{prj.name}/vendor/spdlog/include",
+            "%{IncludeDirs.spdlog}",
             "%{IncludeDirs.GLFW}",
             "%{IncludeDirs.Glad}",
             "%{IncludeDirs.ImGui}",
             "%{IncludeDirs.glm}",
             "%{IncludeDirs.spirv_cross}",
-            "%{IncludeDirs.vulkan}"
+            "%{IncludeDirs.vulkan}",
+            "%{IncludeDirs.stb_image}"
     }
 
     libdirs 
@@ -127,7 +132,7 @@ project "Sandbox"
             "Worm/vendor/spdlog/include",
             "Worm/src",
             "Worm/vendor",
-            "%{IncludeDirs.glm}",
+            "%{IncludeDirs.glm}"
     }
 
     links

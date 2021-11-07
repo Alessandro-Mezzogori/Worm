@@ -11,6 +11,7 @@ namespace Worm {
 	class RenderingAPI {
 	public:
 		enum class API {
+			NONE,
 			DEFAULT,
 			OPENGL,
 			VULKAN,

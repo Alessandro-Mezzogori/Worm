@@ -16,11 +16,11 @@ namespace Worm {
 
 		// ##### Shader Uniforms #####
 
-		virtual void LoadUniform(std::string_view name, int value) const = 0;
-		virtual void LoadUniform(std::string_view name, float value) const = 0;
-		virtual void LoadUniform(std::string_view name, glm::vec3 value) const = 0;
-		virtual void LoadUniform(std::string_view name, glm::vec4 value) const = 0;
-		virtual void LoadUniform(std::string_view name, glm::mat3 value, bool transpose) const = 0;
-		virtual void LoadUniform(std::string_view name, glm::mat4 value, bool transpose) const = 0;
+		virtual void LoadInt(std::string_view name, int value) const = 0;
+		virtual void LoadFloat(std::string_view name, float value) const = 0;
+		virtual void LoadFloat3(std::string_view name, glm::vec3 value) const = 0;
+		virtual void LoadFloat4(std::string_view name, glm::vec4 value) const = 0;
+		virtual void LoadMat3(std::string_view name, glm::mat3 value, bool transpose) const = 0;
+		virtual void LoadMat4(std::string_view name, glm::mat4 value, bool transpose) const = 0;
 	};
 }

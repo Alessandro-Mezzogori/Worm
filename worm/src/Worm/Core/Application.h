@@ -9,6 +9,8 @@
 
 #include "Worm/Events/EventThread.h"
 
+#include "Worm/Rendering/RenderingAPIController.h"
+
 namespace Worm {
 	//
 	//	Interface for the given application class
@@ -27,6 +29,7 @@ namespace Worm {
 
 		inline static const Unique<Window>& GetWindow() { return s_Instance->m_Window; }
 		inline static const ImGuiLayer* GetImGuiLayer() { return s_Instance->m_ImGuiLayer; }
+		inline static RenderingAPI::API GetAPI() { return RenderingAPIController::GetAPI(); }
 	private:
 		//	Events Callback
 		bool OnWindowClose(WindowClosedEvent& e);

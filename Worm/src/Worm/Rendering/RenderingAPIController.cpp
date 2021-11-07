@@ -7,36 +7,37 @@
 namespace Worm {
     // ##### STATIC INITIALIZATION/DECLARATION #####
 
-    std::unordered_map<RenderingAPI::API, Unique<RenderingAPI>> RenderingAPIController::s_LoadedApi;
-
+    RenderingAPI::API RenderingAPIController::s_LoadedAPItype = RenderingAPI::API::NONE;
+    Unique<RenderingAPI> RenderingAPIController::s_LoadedAPI = nullptr;
     // ##### PUBLIC METHODS #####
 
     /*
     * Returns a pointer to the requested RenderingAPI
     */
-    const RenderingAPI* RenderingAPIController::GetAPI(RenderingAPI::API api)
+    const RenderingAPI* RenderingAPIController::GetAPIimpl()
     {
-        if (!s_LoadedApi.contains(api)) 
-            LoadAPI(api);
-        
-        return s_LoadedApi[api].get();
+        return s_LoadedAPI.get();
     }
 
-    void RenderingAPIController::LoadAPI(RenderingAPI::API api) {
-        
-        // Create the RenderingAPI handler for the requested api
+    RenderingAPI::API RenderingAPIController::GetAPI() {
+        return s_LoadedAPItype;
+    }
+
+    void RenderingAPIController::LoadAPI(RenderingAPI::API api) 
+    {
         switch (api)
         {
-        case Worm::RenderingAPI::API::OPENGL: s_LoadedApi[api] = CreateUniqueResource<OpenGLRenderingAPI>(); WORM_LOG_CORE_TRACE("Loading OpenGL RenderingAPI"); break;
-        case Worm::RenderingAPI::API::VULKAN: s_LoadedApi[api] = CreateUniqueResource<VulkanRenderingAPI>(); WORM_LOG_CORE_TRACE("Loading Vulkan RenderingAPI"); break;
-        default: s_LoadedApi[api] = CreateUniqueResource<OpenGLRenderingAPI>(); WORM_LOG_CORE_TRACE("Loading Default RenderingAPI ( Vulkan )"); break;
+        case Worm::RenderingAPI::API::OPENGL: s_LoadedAPI = CreateUniqueResource<OpenGLRenderingAPI>(); WORM_LOG_CORE_TRACE("Loading OpenGL RenderingAPI"); break;
+        case Worm::RenderingAPI::API::VULKAN: s_LoadedAPI = CreateUniqueResource<VulkanRenderingAPI>(); WORM_LOG_CORE_TRACE("Loading Vulkan RenderingAPI"); break;
+        case Worm::RenderingAPI::API::DEFAULT: s_LoadedAPI = CreateUniqueResource<OpenGLRenderingAPI>(); WORM_LOG_CORE_TRACE("Loading Default RenderingAPI ( OpenGL )"); break;
+        default:
+            WORM_CORE_ASSERT(false, "None RenderingAPI is no supported");
         }
-
-        // Initiliaze the requested api
-        s_LoadedApi[api]->Init();
+        s_LoadedAPItype = api;
+        s_LoadedAPI->Init();
     }
 
     void RenderingAPIController::INIT() {
-        s_LoadedApi = std::unordered_map <RenderingAPI::API, Unique<RenderingAPI>>();
+        LoadAPI(RenderingAPI::API::DEFAULT);
     }
 }

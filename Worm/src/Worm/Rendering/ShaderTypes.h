@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Worm/Core/Log.h"
+
 namespace Worm {
 	enum class ShaderType {
 		FLOAT,

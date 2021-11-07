@@ -3,6 +3,7 @@
 #include<vector>
 #include<inttypes.h>
 
+#include "Worm/Core/Log.h"
 #include "ShaderTypes.h"
 
 namespace Worm{
