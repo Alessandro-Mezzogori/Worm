@@ -15,7 +15,7 @@ namespace Worm::mt{
 
 		void enqueue(T t)
 		{
-			std::lock_guard lock(m_Mutex);
+			std::scoped_lock<std::mutex> lock(m_Mutex);
 			m_Queue.push(t);
 			m_Condition.notify_one();
 		}

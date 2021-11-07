@@ -8,6 +8,7 @@ namespace Worm{
 	OpenGLVertexBuffer::OpenGLVertexBuffer()
 	{
 		glCreateBuffers(1, &m_ID);
+		m_Allocated = false;
 	}
 
 	OpenGLVertexBuffer::~OpenGLVertexBuffer()
@@ -15,9 +16,16 @@ namespace Worm{
 		glDeleteBuffers(1, &m_ID);
 	}
 
-	void OpenGLVertexBuffer::SetData(const float* vertices, const size_t size)
+	void OpenGLVertexBuffer::Allocate(size_t size, DrawHint hint)
 	{
-		glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW); // TODO add option to change type fo draw
+		glBufferData(GL_ARRAY_BUFFER, size, nullptr, hint == DrawHint::STATIC ? GL_STATIC_DRAW : GL_DYNAMIC_DRAW);
+		m_Allocated = true;
+	}
+
+	void OpenGLVertexBuffer::SetData(const void* data, const size_t size)
+	{
+		if (!m_Allocated) Allocate(size);
+		glBufferSubData(GL_ARRAY_BUFFER, 0, size, data); // TODO add option to change type fo draw
 	}
 
 	void OpenGLVertexBuffer::Bind() const
@@ -39,6 +47,8 @@ namespace Worm{
 	{
 		return m_BufferLayout;
 	}
+
+	
 
 	/* ##### INDEX BUFFER ##### */
 

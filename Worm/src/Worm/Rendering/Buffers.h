@@ -81,18 +81,39 @@ namespace Worm{
 		uint32_t m_Stride;
 	};
 
+	enum class DrawHint {
+		STATIC, DYNAMIC
+	};
 
 	class VertexBuffer {
 	public:
 		virtual ~VertexBuffer() = default;
 	
-		virtual void SetData(const float* vertices, const size_t size) = 0;
+		/**
+		* Allocate the requested memory size on the gpu
+		*/
+		virtual void Allocate(size_t size, DrawHint hint = DrawHint::STATIC) = 0;
+
+		/**
+		* Sets the given data to the allocated buffer, if not allocated it should allocate the space
+		*/
+		virtual void SetData(const void* vertices, const size_t size) = 0;
+
+		/**
+		* Binds/Unbinds the vertex buffer so that it can be used
+		*/
 		virtual void Bind() const = 0;
 		virtual void Unbind() const = 0;
 
+		/**
+		* Sets/Gets the buffer layout ( how a single vertex is made ) so that the vertex array can sets the attribute pointers automatically
+		*/
 		virtual void SetLayout(const BufferLayout& layout) = 0;
 		virtual const BufferLayout& GetLayout() const = 0;
 	public:
+		/**
+		* Factory method for the Vertex Buffer
+		*/
 		static Shared<VertexBuffer> Create();
 	};
 

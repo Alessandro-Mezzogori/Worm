@@ -175,15 +175,17 @@
     <ClInclude Include="src\Worm\Rendering\OrthographicCamera.h" />
     <ClInclude Include="src\Worm\Rendering\RenderCommand.h" />
     <ClInclude Include="src\Worm\Rendering\Renderer.h" />
+    <ClInclude Include="src\Worm\Rendering\RendererBatch.h" />
     <ClInclude Include="src\Worm\Rendering\RenderingAPI.h" />
     <ClInclude Include="src\Worm\Rendering\RenderingAPIController.h" />
+    <ClInclude Include="src\Worm\Rendering\RenderThread.h" />
     <ClInclude Include="src\Worm\Rendering\Shader.h" />
     <ClInclude Include="src\Worm\Rendering\ShaderController.h" />
     <ClInclude Include="src\Worm\Rendering\ShaderTypes.h" />
     <ClInclude Include="src\Worm\Rendering\Texture.h" />
     <ClInclude Include="src\Worm\Rendering\UniformBuffer.h" />
     <ClInclude Include="src\Worm\Rendering\UniformTable.h" />
-    <ClInclude Include="src\Worm\Rendering\Utilities.h" />
+    <ClInclude Include="src\Worm\Rendering\RenderingPrimitives.h" />
     <ClInclude Include="src\Worm\Rendering\VertexArray.h" />
     <ClInclude Include="src\wormpch.h" />
     <ClInclude Include="vendor\stb_image\stb_image.h" />
@@ -194,7 +196,6 @@
     <ClCompile Include="src\Worm\Core\Layers\ImGuiLayer.cpp" />
     <ClCompile Include="src\Worm\Core\Log.cpp" />
     <ClCompile Include="src\Worm\Core\Window.cpp" />
-    <ClCompile Include="src\Worm\DataStructures\QueueMT.cpp" />
     <ClCompile Include="src\Worm\Events\Event.cpp" />
     <ClCompile Include="src\Worm\Platform\OS\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Worm\Platform\OS\Windows\WindowsWindow.cpp" />

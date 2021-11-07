@@ -4,7 +4,7 @@
 #include "Worm/Core/Window.h"
 
 #include "Worm/Rendering/RenderingAPIController.h"
-#include "Worm/Rendering/Utilities.h"
+#include "Worm/Rendering/RenderingPrimitives.h"
 
 namespace Worm {
 	class RenderCommand {

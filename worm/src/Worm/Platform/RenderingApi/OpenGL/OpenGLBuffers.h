@@ -8,7 +8,8 @@ namespace Worm{
 		OpenGLVertexBuffer();
 		~OpenGLVertexBuffer();
 
-		virtual void SetData(const float* vertices, const size_t size) override;
+		virtual void Allocate(size_t size, DrawHint hint = DrawHint::STATIC) override;
+		virtual void SetData(const void* data, const size_t size) override;
 		virtual void Bind() const override;
 		virtual void Unbind() const override;
 
@@ -17,6 +18,7 @@ namespace Worm{
 	private:
 		unsigned int m_ID;
 		BufferLayout m_BufferLayout;
+		bool m_Allocated;
 	};
 
 	class OpenGLIndexBuffer : public IndexBuffer{

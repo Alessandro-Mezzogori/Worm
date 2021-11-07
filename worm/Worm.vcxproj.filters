@@ -157,7 +157,7 @@
     <ClInclude Include="src\Worm\Rendering\UniformTable.h">
       <Filter>Worm\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="src\Worm\Rendering\Utilities.h">
+    <ClInclude Include="src\Worm\Rendering\RenderingPrimitives.h">
       <Filter>Worm\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Rendering\VertexArray.h">
@@ -165,6 +165,8 @@
     </ClInclude>
     <ClInclude Include="src\wormpch.h" />
     <ClInclude Include="vendor\stb_image\stb_image.h" />
+    <ClInclude Include="src\Worm\Rendering\RenderThread.h" />
+    <ClInclude Include="src\Worm\Rendering\RendererBatch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Worm\Core\Application.cpp">
@@ -181,9 +183,6 @@
     </ClCompile>
     <ClCompile Include="src\Worm\Core\Window.cpp">
       <Filter>Worm\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Worm\DataStructures\QueueMT.cpp">
-      <Filter>Worm\DataStructures</Filter>
     </ClCompile>
     <ClCompile Include="src\Worm\Events\Event.cpp">
       <Filter>Worm\Events</Filter>

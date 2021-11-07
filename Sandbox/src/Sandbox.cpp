@@ -38,12 +38,7 @@ public:
 
 	ExampleLayer()
 	{
-		float data[] = {
-			0.5f, 0.5f, 0.0, 1.0f, 1.0f,
-			-0.5f, 0.5f, 0.0, 0.0f, 1.0f,
-			-0.5f, -0.5f, 0.0, 0.0f, 0.0f,
-			0.5f, -0.5f, 0.0, 1.0f, 0.0f,
-		};
+		auto data = VertexUtils::CreateQuad(-0.5f, -0.5f, 1.0f);
 
 		unsigned int indices[] = {
 			0, 1, 2,
@@ -58,7 +53,7 @@ public:
 
 		Shared<VertexBuffer> vbo = VertexBuffer::Create();
 		vbo->Bind();
-		vbo->SetData(data, sizeof(data));
+		vbo->SetData(data.data(), sizeof(data));
 		vbo->SetLayout(BufferLayout({ { ShaderType::FLOAT3, "aPos" }, {ShaderType::FLOAT2, "aTex"}}));
 
 		Shared<IndexBuffer> ibo = IndexBuffer::Create();

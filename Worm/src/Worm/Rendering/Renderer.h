@@ -5,7 +5,7 @@
 #include "Worm/Core/Core.h"
 #include "Worm/Core/Window.h"
 
-#include "Worm/Rendering/Utilities.h"
+#include "Worm/Rendering/RenderingPrimitives.h"
 
 #include "Worm/Rendering/VertexArray.h"
 
