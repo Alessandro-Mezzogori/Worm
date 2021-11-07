@@ -17,6 +17,8 @@ namespace Worm {
 		virtual void SetIndexBuffer(Shared<IndexBuffer> buffer) = 0;
 	
 		virtual const Shared<IndexBuffer>& GetIndexBuffer() const = 0;
+	public:
+		static Shared<VertexArray> Create();
 	};
 
 }

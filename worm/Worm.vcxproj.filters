@@ -227,5 +227,9 @@
     <ClCompile Include="src\wormpch.cpp" />
     <ClCompile Include="src\Worm\Rendering\Texture.cpp" />
     <ClCompile Include="vendor\stb_image\stb_image.cpp" />
+    <ClCompile Include="src\Worm\Rendering\Buffers.cpp" />
+    <ClCompile Include="src\Worm\Rendering\Shader.cpp" />
+    <ClCompile Include="src\Worm\Rendering\UniformBuffer.cpp" />
+    <ClCompile Include="src\Worm\Rendering\VertexArray.cpp" />
   </ItemGroup>
 </Project>

@@ -11,6 +11,7 @@ namespace Worm {
 		virtual void SetData(void* data, size_t size) = 0;
 		virtual void SetBindingPoint(uint32_t binding) = 0;
 		virtual void SetBindingPointRange(uint32_t binding, size_t start, size_t end) = 0;
-	
+	public:
+		static Shared<UniformBuffer> Create();
 	};
 }

@@ -4,6 +4,7 @@
 #include<inttypes.h>
 
 #include "Worm/Core/Log.h"
+#include "Worm/Core/Core.h"
 #include "ShaderTypes.h"
 
 namespace Worm{
@@ -91,6 +92,8 @@ namespace Worm{
 
 		virtual void SetLayout(const BufferLayout& layout) = 0;
 		virtual const BufferLayout& GetLayout() const = 0;
+	public:
+		static Shared<VertexBuffer> Create();
 	};
 
 	class IndexBuffer {
@@ -101,6 +104,8 @@ namespace Worm{
 		virtual void Bind() const = 0;
 		virtual void Unbind() const = 0;
 		virtual const size_t GetIndicesCount() const = 0;
+	public:
+		static Shared<IndexBuffer> Create();
 	};
 
 }

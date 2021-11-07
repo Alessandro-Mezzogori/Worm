@@ -2,11 +2,10 @@
 
 #include <iostream>
 
-#include "Worm/Platform/RenderingApi/OpenGL/OpenGLBuffers.h"
-#include "Worm/Platform/RenderingApi/OpenGL/OpenGLVertexArray.h"
-#include "Worm/Platform/RenderingApi/OpenGL/OpenGLShader.h"
-#include "Worm/Platform/RenderingApi/OpenGL/OpenGLUniformBuffer.h"
-
+#include "Worm/Rendering/VertexArray.h"
+#include "Worm/Rendering/UniformBuffer.h"
+#include "Worm/Rendering/Shader.h"
+#include "Worm/Rendering/Buffers.h"
 #include "Worm/Rendering/Texture.h"
 
 #include "imgui/imgui.h"
@@ -31,6 +30,7 @@ public:
 	Shared<VertexArray> m_VertexArray;
 	Shared<Shader> m_Shader;
 	Shared<Texture> m_Texture;
+	Shared<UniformBuffer> m_UniformBuffer;
 
 
 	RenderingFrame m_Frame;
@@ -53,15 +53,15 @@ public:
 		m_Frame = RenderingFrame({ 0.0f, 0.0f, 0.5f, 1.0f });
 		m_Frame2 = RenderingFrame(ViewportUtils::GetHorizontalComplementaryViewport(m_Frame.renderingViewport));
 
-		m_VertexArray = Worm::CreateSharedResource<OpenGLVertexArray>();
+		m_VertexArray = VertexArray::Create();
 		m_VertexArray->Bind();
 
-		Shared<VertexBuffer> vbo = Worm::CreateSharedResource<OpenGLVertexBuffer>();
+		Shared<VertexBuffer> vbo = VertexBuffer::Create();
 		vbo->Bind();
 		vbo->SetData(data, sizeof(data));
 		vbo->SetLayout(BufferLayout({ { ShaderType::FLOAT3, "aPos" }, {ShaderType::FLOAT2, "aTex"}}));
 
-		Shared<IndexBuffer> ibo = Worm::CreateSharedResource<OpenGLIndexBuffer>();
+		Shared<IndexBuffer> ibo = IndexBuffer::Create();
 		ibo->Bind();
 		ibo->SetData(indices, sizeof(indices)/sizeof(uint32_t));
 
@@ -99,11 +99,15 @@ public:
 
 			void main()
 			{
-			   FragColor = texture(texture0, TexCoords);
+			   FragColor = texture(texture0, TexCoords)*vec4(u_Color, 1.0f);
 			}
 		)";
 
-		m_Shader = CreateSharedResource<OpenGLShader>(vertexShaderSource, fragmentShaderSource);
+		m_Shader = Shader::Create(vertexShaderSource, fragmentShaderSource);
+		m_UniformBuffer = UniformBuffer::Create();
+		m_UniformBuffer->Bind();
+		uint32_t binding = m_Shader->GetUniformBlockBinding("TestBlock");
+		m_UniformBuffer->SetBindingPoint(binding);
 
 		m_Texture = Texture::Create("assets/textures/wood_container.jpg");
 		m_Texture->Bind(1);
@@ -116,19 +120,26 @@ public:
 	virtual void OnUpdate() override 
 	{
 		Renderer::BeginScene(Environment(), Camera());
+		m_Shader->Activate();
+		m_UniformBuffer->Bind();
+		m_Shader->LoadInt("texture0", 1);
 
+		m_VertexArray->Bind();
+
+		Renderer::SetActiveRenderingFrame(m_Frame);
 		RenderCommand::ClearColor({ 0.2f, 0.3f, 0.3f, 1.0f });
 		RenderCommand::ClearFrame();
-		m_Shader->Activate();
-		m_Shader->LoadInt("texture0", 1);
-		m_VertexArray->Bind();
+		
+		const float blue[] = { 0.0f, 0.0f, 1.0f};
+		m_UniformBuffer->SetData((void*)blue, sizeof(blue));
 		Renderer::Submit(*m_VertexArray);
 
+		Renderer::SetActiveRenderingFrame(m_Frame2);
 		RenderCommand::ClearColor({ 0.2f, 0.3f, 0.3f, 1.0f });
 		RenderCommand::ClearFrame();
-		m_Shader->Activate();
-		// m_Shader->LoadFloat3("u_Color", { 0.0f, 1.0f, 0.0f });
-		m_VertexArray->Bind();
+
+		const float red[] = { 1.0f, 0.0f, 0.0f };
+		m_UniformBuffer->SetData((void*) red, sizeof(red));
 		Renderer::Submit(*m_VertexArray);
 
 		Renderer::EndScene();
