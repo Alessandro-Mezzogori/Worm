@@ -27,27 +27,40 @@ class ExampleLayer : public Worm::Layer
 public:
 	unsigned int shaderProgram;
 
-	Shared<VertexArray> m_VertexArray;
+	//Shared<VertexArray> m_VertexArray;
 	Shared<Shader> m_Shader;
 	Shared<Texture> m_Texture;
 	Shared<UniformBuffer> m_UniformBuffer;
 
-
 	RenderingFrame m_Frame;
 	RenderingFrame m_Frame2;
 
+	RenderingBatchElement element;
+
+	std::array<Vertex, 4> data;
+	std::array<uint32_t, 6> indices;
+
 	ExampleLayer()
 	{
-		auto data = VertexUtils::CreateQuad(-0.5f, -0.5f, 1.0f);
+		data = VertexUtils::CreateQuad(-0.5f, -0.5f, 1.0f);
 
-		unsigned int indices[] = {
+		indices = {
 			0, 1, 2,
 			0, 2, 3,
 		};
 
+		element.Data = data.data();
+		element.Size = sizeof(data);
+
+		element.Indices = indices.data();
+		element.IndicesCount = indices.size();
+
+		element.Layout = BufferLayout({ { ShaderType::FLOAT3, "aPos" }, {ShaderType::FLOAT2, "aTex"} });
+
 		m_Frame = RenderingFrame({ 0.0f, 0.0f, 0.5f, 1.0f });
 		m_Frame2 = RenderingFrame(ViewportUtils::GetHorizontalComplementaryViewport(m_Frame.renderingViewport));
 
+		/*
 		m_VertexArray = VertexArray::Create();
 		m_VertexArray->Bind();
 
@@ -62,6 +75,7 @@ public:
 
 		m_VertexArray->AddVertexBuffer(vbo);
 		m_VertexArray->SetIndexBuffer(ibo);
+		*/
 
 		// Shaders 
 
@@ -119,7 +133,7 @@ public:
 		m_UniformBuffer->Bind();
 		m_Shader->LoadInt("texture0", 1);
 
-		m_VertexArray->Bind();
+		// m_VertexArray->Bind();
 
 		Renderer::SetActiveRenderingFrame(m_Frame);
 		RenderCommand::ClearColor({ 0.2f, 0.3f, 0.3f, 1.0f });
@@ -127,7 +141,7 @@ public:
 		
 		const float blue[] = { 0.0f, 0.0f, 1.0f};
 		m_UniformBuffer->SetData((void*)blue, sizeof(blue));
-		Renderer::Submit(*m_VertexArray);
+		Renderer::Submit(element);
 
 		Renderer::SetActiveRenderingFrame(m_Frame2);
 		RenderCommand::ClearColor({ 0.2f, 0.3f, 0.3f, 1.0f });
@@ -135,7 +149,7 @@ public:
 
 		const float red[] = { 1.0f, 0.0f, 0.0f };
 		m_UniformBuffer->SetData((void*) red, sizeof(red));
-		Renderer::Submit(*m_VertexArray);
+		Renderer::Submit(element);
 
 		Renderer::EndScene();
 	}

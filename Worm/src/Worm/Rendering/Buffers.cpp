@@ -9,7 +9,8 @@ namespace Worm{
 
 Shared<VertexBuffer> Worm::VertexBuffer::Create()
 {
-	switch (Application::GetAPI())
+	auto api = Application::GetAPI();
+	switch (api)
 	{
 	case RenderingAPI::API::OPENGL: return CreateSharedResource<OpenGLVertexBuffer>();
 	case RenderingAPI::API::DEFAULT: return CreateSharedResource<OpenGLVertexBuffer>();

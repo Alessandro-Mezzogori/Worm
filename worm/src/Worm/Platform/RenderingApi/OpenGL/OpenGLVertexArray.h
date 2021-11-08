@@ -20,6 +20,7 @@ namespace Worm{
         virtual void Unbind() const override;
         virtual void AddVertexBuffer(Shared<VertexBuffer> buffer) override;
         virtual void SetIndexBuffer(Shared<IndexBuffer> buffer) override;
+        virtual void DetachVertexBuffers() override;
         virtual const Shared<IndexBuffer>& GetIndexBuffer() const override;
     private:
         unsigned int m_ID;

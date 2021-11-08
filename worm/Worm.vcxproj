@@ -175,7 +175,7 @@
     <ClInclude Include="src\Worm\Rendering\OrthographicCamera.h" />
     <ClInclude Include="src\Worm\Rendering\RenderCommand.h" />
     <ClInclude Include="src\Worm\Rendering\Renderer.h" />
-    <ClInclude Include="src\Worm\Rendering\RendererBatch.h" />
+    <ClInclude Include="src\Worm\Rendering\RenderingBatch.h" />
     <ClInclude Include="src\Worm\Rendering\RenderingAPI.h" />
     <ClInclude Include="src\Worm\Rendering\RenderingAPIController.h" />
     <ClInclude Include="src\Worm\Rendering\RenderThread.h" />
@@ -209,6 +209,7 @@
     <ClCompile Include="src\Worm\Rendering\Buffers.cpp" />
     <ClCompile Include="src\Worm\Rendering\RenderCommand.cpp" />
     <ClCompile Include="src\Worm\Rendering\Renderer.cpp" />
+    <ClCompile Include="src\Worm\Rendering\RenderingBatch.cpp" />
     <ClCompile Include="src\Worm\Rendering\RenderingAPIController.cpp" />
     <ClCompile Include="src\wormpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

@@ -97,6 +97,12 @@ namespace Worm{
 	{
 		m_IndexBuffer = buffer;
 	}
+	
+	void OpenGLVertexArray::DetachVertexBuffers()
+	{
+		m_VertexBuffers.clear();
+	}
+	
 	const Shared<IndexBuffer>& OpenGLVertexArray::GetIndexBuffer() const
 	{
 		return m_IndexBuffer;

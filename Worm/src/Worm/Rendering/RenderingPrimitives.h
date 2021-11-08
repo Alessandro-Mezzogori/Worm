@@ -35,6 +35,5 @@ namespace Worm {
 				{{x, y + size, 0.0f}, {0.0f, 1.0f}}
 			}};
 		}
-
 	}
 }

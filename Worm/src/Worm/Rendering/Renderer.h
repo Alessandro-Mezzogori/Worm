@@ -8,6 +8,7 @@
 #include "Worm/Rendering/RenderingPrimitives.h"
 
 #include "Worm/Rendering/VertexArray.h"
+#include "Worm/Rendering/RenderingBatch.h"
 
 namespace Worm {
 	struct RenderingFrame {
@@ -33,7 +34,7 @@ namespace Worm {
 		static void EndScene();
 		static void FlushScene();
 
-		static void Submit(const VertexArray& vertexArray);
+		static void Submit(RenderingBatchElement element);
 
 		static void SetActiveRenderingFrame(RenderingFrame frame);
 		static RenderingFrame& GetActiveRenderingFrame();
@@ -41,5 +42,6 @@ namespace Worm {
 
 	private:
 		static RenderingFrame s_ActiveFrame;
+		static RenderingBatch s_Batch;
 	};
 }

@@ -166,7 +166,7 @@
     <ClInclude Include="src\wormpch.h" />
     <ClInclude Include="vendor\stb_image\stb_image.h" />
     <ClInclude Include="src\Worm\Rendering\RenderThread.h" />
-    <ClInclude Include="src\Worm\Rendering\RendererBatch.h" />
+    <ClInclude Include="src\Worm\Rendering\RenderingBatch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Worm\Core\Application.cpp">
@@ -230,5 +230,6 @@
     <ClCompile Include="src\Worm\Rendering\Shader.cpp" />
     <ClCompile Include="src\Worm\Rendering\UniformBuffer.cpp" />
     <ClCompile Include="src\Worm\Rendering\VertexArray.cpp" />
+    <ClCompile Include="src\Worm\Rendering\RenderingBatch.cpp" />
   </ItemGroup>
 </Project>
