@@ -171,6 +171,7 @@
     <ClInclude Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="src\Worm\Platform\RenderingApi\Vulkan\VulkanRenderingAPI.h" />
     <ClInclude Include="src\Worm\Rendering\Buffers.h" />
+    <ClInclude Include="src\Worm\Rendering\Camera.h" />
     <ClInclude Include="src\Worm\Rendering\Framebuffer.h" />
     <ClInclude Include="src\Worm\Rendering\OrthographicCamera.h" />
     <ClInclude Include="src\Worm\Rendering\RenderCommand.h" />
@@ -207,6 +208,7 @@
     <ClCompile Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\Worm\Platform\RenderingApi\Vulkan\VulkanRenderingAPI.cpp" />
     <ClCompile Include="src\Worm\Rendering\Buffers.cpp" />
+    <ClCompile Include="src\Worm\Rendering\OrthographicCamera.cpp" />
     <ClCompile Include="src\Worm\Rendering\RenderCommand.cpp" />
     <ClCompile Include="src\Worm\Rendering\Renderer.cpp" />
     <ClCompile Include="src\Worm\Rendering\RenderingBatch.cpp" />

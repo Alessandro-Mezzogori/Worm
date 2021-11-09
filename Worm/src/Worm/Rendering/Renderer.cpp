@@ -8,41 +8,51 @@ namespace Worm {
 
 	RenderingFrame Renderer::s_ActiveFrame;
 	RenderingBatch Renderer::s_Batch;
+	Camera* Renderer::s_ActiveCamera = nullptr;
+	Shader* Renderer::s_ActiveShader = nullptr;
 
 	// ##### SCENE CONTROLS FUNTIONS #####
 
-	void Renderer::BeginScene(Environment env, Camera camera)
+	void Renderer::BeginScene(Environment env, Camera* camera, Shader* shader)
 	{
-		s_Batch.Clear();
+		s_Batch.Begin();
+		s_ActiveCamera = camera;
+		s_ActiveShader = shader;
 	}
 
 	void Renderer::EndScene()
 	{
-		if (s_Batch.GetUsedSize() != 0) RenderCommand::RenderIndexed(s_Batch.GetVertexArray());
+		FlushScene();
+		s_ActiveShader = nullptr;
+		s_ActiveCamera = nullptr;
 	}
 
-	void Renderer::FlushScene()
+	void Renderer::FlushScene(bool clearBatch)
 	{
+		s_ActiveShader->Activate();
+		s_ActiveShader->LoadMat4(s_CameraMatrixUniformName, s_ActiveCamera->GetCamMatrix());
 		
+		s_Batch.End();
+		if (s_Batch.GetUsedSize() != 0) {
+			RenderCommand::RenderIndexed(s_Batch.GetVertexArray());
+
+			if (clearBatch) s_Batch.Clear();
+		}
 	}
 
 	// ##### RENDERING OBJECTS FUNCTIONS ######
 
 	void Renderer::Submit(RenderingBatchElement element) {
 		if (!s_Batch.HasSpace(element)) {
-			RenderCommand::RenderIndexed(s_Batch.GetVertexArray());
-			s_Batch.Clear();
+			FlushScene();
 		};
 		s_Batch.AddData(element);
 	}
 
 	// ##### ENVIRONMENT FUNCTIONS ######
 
-	void Renderer::SetActiveRenderingFrame(RenderingFrame frame) {
-		if (s_Batch.GetUsedSize() != 0) {
-			RenderCommand::RenderIndexed(s_Batch.GetVertexArray());
-			s_Batch.Clear();
-		};
+	void Renderer::SetActiveRenderingFrame(RenderingFrame frame, bool clearBatch) {
+		// FlushScene(clearBatch);
 
 		s_ActiveFrame = frame;
 
@@ -58,7 +68,7 @@ namespace Worm {
 		RenderingAPIController::INIT();
 		RenderCommand::INIT();
 
-		s_ActiveFrame = RenderingFrame();
+		SetActiveRenderingFrame(RenderingFrame());
 
 		s_Batch = RenderingBatch();
 		s_Batch.INIT();

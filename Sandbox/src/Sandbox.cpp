@@ -8,6 +8,8 @@
 #include "Worm/Rendering/Buffers.h"
 #include "Worm/Rendering/Texture.h"
 
+#include "Worm/Rendering/OrthographicCamera.h"
+
 #include "imgui/imgui.h"
 
 
@@ -35,47 +37,32 @@ public:
 	RenderingFrame m_Frame;
 	RenderingFrame m_Frame2;
 
-	RenderingBatchElement element;
+	RenderingBatchElement m_Element;
+	RenderingBatchElement m_Element2;
 
-	std::array<Vertex, 4> data;
-	std::array<uint32_t, 6> indices;
+	Shared<Camera> m_Camera;
+
+	std::vector<float> data = {
+		0.0f, 0.0f, 0.0f, 0.0f, 0.0f, // front lower left
+		1.0f, 0.0f, 0.0f, 1.0f, 0.0f, // front lower right
+		1.0f, 1.0f, 0.0f, 1.0f, 1.0f, // front upper right
+		0.0f, 1.0f, 0.0f, 0.0f, 1.0f, // front upper left
+	};
+
+	std::vector<uint32_t> indices = {
+		0, 1, 2, 2, 3, 0,
+	};
 
 	ExampleLayer()
 	{
-		data = VertexUtils::CreateQuad(-0.5f, -0.5f, 1.0f);
+		m_Camera = CreateSharedResource<OrtographicCamera>(Application::GetWindow()->GetWidth(), Application::GetWindow()->GetHeight());
+		m_Camera->Move({ -3.0f, 0.0f, 0.0f });
 
-		indices = {
-			0, 1, 2,
-			0, 2, 3,
-		};
-
-		element.Data = data.data();
-		element.Size = sizeof(data);
-
-		element.Indices = indices.data();
-		element.IndicesCount = indices.size();
-
-		element.Layout = BufferLayout({ { ShaderType::FLOAT3, "aPos" }, {ShaderType::FLOAT2, "aTex"} });
+		m_Element = { data.data(), indices.data(), data.size() * sizeof(float), indices.size(), BufferLayout({ { ShaderType::FLOAT3, "aPos" }, {ShaderType::FLOAT2, "aTex"} }) };
+		// m_Element2 = { data2.data(), indices.data(), sizeof(data2), indices.size(), m_Element.Layout };
 
 		m_Frame = RenderingFrame({ 0.0f, 0.0f, 0.5f, 1.0f });
 		m_Frame2 = RenderingFrame(ViewportUtils::GetHorizontalComplementaryViewport(m_Frame.renderingViewport));
-
-		/*
-		m_VertexArray = VertexArray::Create();
-		m_VertexArray->Bind();
-
-		Shared<VertexBuffer> vbo = VertexBuffer::Create();
-		vbo->Bind();
-		vbo->SetData(data.data(), sizeof(data));
-		vbo->SetLayout(BufferLayout({ { ShaderType::FLOAT3, "aPos" }, {ShaderType::FLOAT2, "aTex"}}));
-
-		Shared<IndexBuffer> ibo = IndexBuffer::Create();
-		ibo->Bind();
-		ibo->SetData(indices, sizeof(indices)/sizeof(uint32_t));
-
-		m_VertexArray->AddVertexBuffer(vbo);
-		m_VertexArray->SetIndexBuffer(ibo);
-		*/
 
 		// Shaders 
 
@@ -85,12 +72,15 @@ public:
 
 			out vec3 Position;
 			out vec2 TexCoords;
+
+			uniform mat4 u_CameraMatrix;
 		
 			void main()
 			{
 				TexCoords = aTex;
-				Position = aPos;
-				gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+				// Position = vec3(u_CameraMatrix * vec4(aPos.x, aPos.y, aPos.z, 1.0));
+				Position = aPos;				
+				gl_Position = vec4(Position, 1.0f);
 			}
 		)";
 		const char* fragmentShaderSource = R"(#version 430 core
@@ -128,34 +118,26 @@ public:
 
 	virtual void OnUpdate() override 
 	{
-		Renderer::BeginScene(Environment(), Camera());
+		static const float blue[] = { 0.0f, 0.0f, 1.0f };
+		static const float red[] = { 1.0f, 0.0f, 0.0f };
+
+		Renderer::BeginScene(Environment(), m_Camera.get(), m_Shader.get());
+		
 		m_Shader->Activate();
 		m_UniformBuffer->Bind();
 		m_Shader->LoadInt("texture0", 1);
-
-		// m_VertexArray->Bind();
-
-		Renderer::SetActiveRenderingFrame(m_Frame);
-		RenderCommand::ClearColor({ 0.2f, 0.3f, 0.3f, 1.0f });
-		RenderCommand::ClearFrame();
 		
-		const float blue[] = { 0.0f, 0.0f, 1.0f};
-		m_UniformBuffer->SetData((void*)blue, sizeof(blue));
-		Renderer::Submit(element);
+		Renderer::Submit(m_Element);
+		// Renderer::Submit(m_Element2);
 
-		Renderer::SetActiveRenderingFrame(m_Frame2);
 		RenderCommand::ClearColor({ 0.2f, 0.3f, 0.3f, 1.0f });
 		RenderCommand::ClearFrame();
-
-		const float red[] = { 1.0f, 0.0f, 0.0f };
 		m_UniformBuffer->SetData((void*) red, sizeof(red));
-		Renderer::Submit(element);
 
 		Renderer::EndScene();
 	}
 
 	virtual void OnImGuiRender() override {
-		ImGui::Text("Layer render");
 	}
 };
 

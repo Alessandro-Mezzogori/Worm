@@ -12,37 +12,57 @@ namespace Worm {
 		size_t IndicesCount;
 
 		BufferLayout Layout;
+
+		RenderingBatchElement(void* data, uint32_t* indices, size_t size, size_t indicesCount, BufferLayout layout) :
+			Data(data), Indices(indices), Size(size), IndicesCount(indicesCount), Layout(layout)
+		{
+		}
+
+		RenderingBatchElement() {
+			Data = nullptr;
+			Indices = nullptr;
+			Size = 0;
+			IndicesCount = 0;
+			Layout = BufferLayout();
+		}
 	};
 
 	class RenderingBatch {
 	public:
 		RenderingBatch();
-		virtual ~RenderingBatch() = default;
+		~RenderingBatch() = default;
 
-		virtual void INIT();
-		virtual void Allocate();
-		virtual void Clear();
+		void INIT();
+		void Clear();
 
-		virtual void AddData(RenderingBatchElement element);
-		virtual bool HasSpace(RenderingBatchElement element) const;
+		void Begin();
+		void End();
 
-		virtual void SetBufferLayout(const BufferLayout& layout);
-		virtual const VertexArray& GetVertexArray() const;
+		void AddData(RenderingBatchElement element);
+		bool HasSpace(RenderingBatchElement element) const;
 
-		virtual size_t GetMaximumSize() const;
-		virtual size_t GetUsedSize() const;
+		void SetBufferLayout(const BufferLayout& layout);
+		const VertexArray& GetVertexArray() const;
 
-		// virtual void SetMaximumSize(size_t size);
-		// virtual void SetMaximumIndicesCount(size_t count);
+		inline size_t GetMaximumSize() const;
+		inline size_t GetUsedSize() const;
+		inline size_t GetIndicesUsed() const;
 	private:
 		// Batcher attributes
 		static constexpr size_t s_DefaultMaxBatchSize = 3145728; // 3MB -> average vertex is approx 50 -> 60k vertices per pass
 		static constexpr size_t s_DefaultMaxIndicesCount =  524288 ; // 2MB of indices -> 5MB of data transfered per batch if filled
+
 		size_t m_MaxBatchSize;
 		size_t m_MaxIndicesCount;
+		size_t m_MaxTextureSlots; // queried from driver on init
 
-		size_t m_UsedSize;
-		size_t m_UsedIndices;
+		size_t m_VertexSize;
+
+		// Saved data pointers
+		char* m_DataPtr;
+		uint32_t* m_IndicesPtr;
+		std::vector<char> m_Data;
+		std::vector<uint32_t> m_Indices;
 
 		// Control attributes
 		bool m_HasBufferLayout;
