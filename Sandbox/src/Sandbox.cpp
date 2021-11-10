@@ -47,16 +47,22 @@ public:
 		1.0f, 0.0f, 0.0f, 1.0f, 0.0f, // front lower right
 		1.0f, 1.0f, 0.0f, 1.0f, 1.0f, // front upper right
 		0.0f, 1.0f, 0.0f, 0.0f, 1.0f, // front upper left
+		0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // back lower left
+		1.0f, 0.0f, 1.0f, 1.0f, 0.0f, // back lower right 
+		1.0f, 1.0f, 1.0f, 1.0f, 1.0f, // back upper right
+		0.0f, 1.0f, 1.0f, 0.0f, 1.0f, // back upper left
 	};
 
 	std::vector<uint32_t> indices = {
 		0, 1, 2, 2, 3, 0,
+		1, 5, 6, 6, 2, 1,
+		5, 4, 7, 7, 6, 5,
+		4, 0, 3, 3, 7, 4
 	};
 
 	ExampleLayer()
 	{
-		m_Camera = CreateSharedResource<OrtographicCamera>(Application::GetWindow()->GetWidth(), Application::GetWindow()->GetHeight());
-		m_Camera->Move({ -3.0f, 0.0f, 0.0f });
+		m_Camera = Shared<OrtographicCamera>(new OrtographicCamera(Application::GetWindow()->GetWidth(), Application::GetWindow()->GetHeight(), { 0.0f, 1.0f, 1.0f }, { 0.0f, 0.5f, 0.0f }));
 
 		m_Element = { data.data(), indices.data(), data.size() * sizeof(float), indices.size(), BufferLayout({ { ShaderType::FLOAT3, "aPos" }, {ShaderType::FLOAT2, "aTex"} }) };
 		// m_Element2 = { data2.data(), indices.data(), sizeof(data2), indices.size(), m_Element.Layout };
@@ -70,7 +76,6 @@ public:
 			layout (location = 0) in vec3 aPos;
 			layout (location = 1) in vec2 aTex;
 
-			out vec3 Position;
 			out vec2 TexCoords;
 
 			uniform mat4 u_CameraMatrix;
@@ -78,15 +83,12 @@ public:
 			void main()
 			{
 				TexCoords = aTex;
-				// Position = vec3(u_CameraMatrix * vec4(aPos.x, aPos.y, aPos.z, 1.0));
-				Position = aPos;				
-				gl_Position = vec4(Position, 1.0f);
+				gl_Position = u_CameraMatrix * vec4(aPos, 1.0);
 			}
 		)";
 		const char* fragmentShaderSource = R"(#version 430 core
 			out vec4 FragColor;
 
-			in vec3 Position;
 			in vec2 TexCoords;
 
 			uniform sampler2D texture0;
@@ -112,8 +114,26 @@ public:
 		m_Texture->Bind(1);
 	}
 
-	virtual void OnEvent(std::shared_ptr<Worm::BaseEvent> e) override {
+	bool CameraMovement(KeyPressedEvent e){
+		KeyCode keycode = e.GetKeyCode();
+	
+		switch(keycode){
+			case Key::A: m_Camera->Move({ -1.0f, 0.0f, 0.0f }); break;
+			case Key::D: m_Camera->Move({ 1.0f, 0.0f, 0.0f }); break;
+			case Key::W: m_Camera->Move({ 0.0f, 0.0f, -1.0f}); break;
+			case Key::S: m_Camera->Move({ 0.0f, 0.0f, 1.0f}); break;
+			case Key::Q: m_Camera->Rotate(40.0f, 0.0f); break;
+			case Key::E: m_Camera->Rotate(-40.0f, 0.0f); break;
+			case Key::F: m_Camera->Rotate(0.0f, 40.0f); break;
+			case Key::G: m_Camera->Rotate(0.0f, -40.0f); break;
+		}
+		return true;
+	}
 
+
+	virtual void OnEvent(Shared<Worm::BaseEvent> e) override {
+		Worm::EventDispatcher dispatcher(e);
+		dispatcher.Dispatch<KeyPressedEvent>(Worm::BIND_METHOD_CALLBACK<bool, KeyPressedEvent, ExampleLayer>(this, &ExampleLayer::CameraMovement));
 	}
 
 	virtual void OnUpdate() override 

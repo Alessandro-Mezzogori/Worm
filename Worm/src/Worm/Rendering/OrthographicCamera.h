@@ -5,7 +5,7 @@
 namespace Worm {
 	class OrtographicCamera : public Camera{
 	public:
-		OrtographicCamera(uint32_t screenWidth, uint32_t screenHeight, const glm::vec3& position = { -2.0f, 1.0f, 0.0f }, const glm::vec3& lookPoint = {0.0f, 0.0f, 0.0f});
+		OrtographicCamera(uint32_t screenWidth, uint32_t screenHeight, const glm::vec3& position, const glm::vec3& lookPoint);
 
 		virtual void Move(const glm::vec3& direction) override;
 		virtual void Rotate(float horizontalDegrees, float verticalDegrees) override;

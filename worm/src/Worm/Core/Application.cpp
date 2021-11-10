@@ -53,7 +53,7 @@ namespace Worm {
 		m_EventThread->QueueEvent(e);
 	}
 
-	void Application::EventThreadLoop(void)
+	void Application::EventThreadLoop()
 	{
 		while(s_Instance->m_Running){
 			std::shared_ptr<BaseEvent> e = m_EventThread->PopEvent();
