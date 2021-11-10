@@ -47,9 +47,10 @@ namespace Worm{
 		GLsizei vpHeight = static_cast<GLsizei>(height * window->GetHeight());
 
 		// Sets the rendering viewport
-		glViewport(xCoord, yCoord, vpWidth, vpHeight);
+		//glViewport(xCoord, yCoord, vpWidth, vpHeight);
+		glViewport(0, 0, vpWidth, vpHeight);
 		// Sets the scissor box so that everything outside is culled 
-		glScissor(xCoord, yCoord, vpWidth, vpHeight);
+		// glScissor(xCoord, yCoord, vpWidth, vpHeight);
 	}
 
 	void OpenGLRenderingAPI::EnableScissors(bool value)

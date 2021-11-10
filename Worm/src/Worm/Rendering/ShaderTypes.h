@@ -20,7 +20,7 @@ namespace Worm {
 	static unsigned int ShaderTypeSizeOf(ShaderType type) {
 		switch (type)
 		{
-		case Worm::ShaderType::FLOAT:	return 4 * 4;
+		case Worm::ShaderType::FLOAT:	return 4 * 1;
 		case Worm::ShaderType::FLOAT2:	return 4 * 2;
 		case Worm::ShaderType::FLOAT3:	return 4 * 3;
 		case Worm::ShaderType::FLOAT4:	return 4 * 4;

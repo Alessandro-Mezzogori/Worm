@@ -37,6 +37,7 @@ namespace Worm{
     void OpenGLTexture::Unbind() const
     {
         glBindTexture(GL_TEXTURE_2D, 0);
+        glActiveTexture(GL_TEXTURE0);
     }
 
     uint32_t OpenGLTexture::GetID() const
@@ -48,7 +49,9 @@ namespace Worm{
     {
         int width, height, numChannels;
         // Load the texture data
+        stbi_set_flip_vertically_on_load(true);
         uint8_t* data = stbi_load(path.string().c_str(), &width, &height, &numChannels, 0);
+
 
         if (data == nullptr) {
             WORM_LOG_CORE_ERROR("TEXTURE LOADING ERROR | path: {0}", path.string());
