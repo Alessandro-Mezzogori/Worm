@@ -5,6 +5,9 @@
 #include "VertexArray.h"
 
 namespace Worm {
+	struct RenderingAPIInformation {
+		int32_t MaxFragmentTextureSlots;
+	};
 	/*
 	 * Interface for the implementation of rendering api's like Vulkan, Opengl, Metal, DirectX
 	 */
@@ -23,7 +26,10 @@ namespace Worm {
 		virtual void ClearColor(const glm::vec4& color) const = 0;
 		virtual void ClearFrame() const = 0;
 
-		virtual void SetViewportAndScissors(float x, float y, float width, float height) const = 0;
-		virtual void EnableScissors(bool value) const = 0;
+		virtual void SetViewportAndScissors(float x, float y, float width, float height) = 0;
+		virtual void EnableScissors(bool value) = 0;
+		virtual void EnableDepthTest(bool value) = 0;
+
+		virtual const RenderingAPIInformation& GetInformation() const = 0;
 	};
 }

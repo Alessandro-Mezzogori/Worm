@@ -45,16 +45,6 @@ namespace Worm{
 		glBufferSubData(GL_ARRAY_BUFFER, 0, m_AllocatedSize, nullptr);
 	}
 
-	void OpenGLVertexBuffer::SetLayout(const BufferLayout& layout)
-	{
-		m_BufferLayout = layout;
-	}
-
-	const BufferLayout& OpenGLVertexBuffer::GetLayout() const
-	{
-		return m_BufferLayout;
-	}
-
 	/* ##### INDEX BUFFER ##### */
 
 	OpenGLIndexBuffer::OpenGLIndexBuffer()

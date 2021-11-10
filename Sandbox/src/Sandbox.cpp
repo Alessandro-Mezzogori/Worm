@@ -60,11 +60,13 @@ public:
 		4, 0, 3, 3, 7, 4
 	};
 
+	const BufferLayout m_Layout = BufferLayout({ { ShaderType::FLOAT3, "aPos" }, {ShaderType::FLOAT2, "aTex"} });
+
 	ExampleLayer()
 	{
-		m_Camera = Shared<OrtographicCamera>(new OrtographicCamera(Application::GetWindow()->GetWidth(), Application::GetWindow()->GetHeight(), { 0.0f, 1.0f, 1.0f }, { 0.0f, 0.5f, 0.0f }));
+		m_Camera = Shared<OrtographicCamera>(new OrtographicCamera(Application::GetWindow()->GetWidth(), Application::GetWindow()->GetHeight(), { 0.0f, 1.0f, 2.0f }, { 0.0f, 0.5f, 0.0f }));
 
-		m_Element = { data.data(), indices.data(), data.size() * sizeof(float), indices.size(), BufferLayout({ { ShaderType::FLOAT3, "aPos" }, {ShaderType::FLOAT2, "aTex"} }) };
+		m_Element = { data.data(), indices.data(), data.size() * sizeof(float), indices.size() };
 		// m_Element2 = { data2.data(), indices.data(), sizeof(data2), indices.size(), m_Element.Layout };
 
 		m_Frame = RenderingFrame({ 0.0f, 0.0f, 0.5f, 1.0f });
@@ -122,11 +124,12 @@ public:
 			case Key::D: m_Camera->Move({ 1.0f, 0.0f, 0.0f }); break;
 			case Key::W: m_Camera->Move({ 0.0f, 0.0f, -1.0f}); break;
 			case Key::S: m_Camera->Move({ 0.0f, 0.0f, 1.0f}); break;
-			case Key::Q: m_Camera->Rotate(40.0f, 0.0f); break;
-			case Key::E: m_Camera->Rotate(-40.0f, 0.0f); break;
+			case Key::Q: m_Camera->Rotate(-40.0f, 0.0f); break;
+			case Key::E: m_Camera->Rotate(40.0f, 0.0f); break;
 			case Key::F: m_Camera->Rotate(0.0f, 40.0f); break;
 			case Key::G: m_Camera->Rotate(0.0f, -40.0f); break;
 		}
+
 		return true;
 	}
 
@@ -141,7 +144,8 @@ public:
 		static const float blue[] = { 0.0f, 0.0f, 1.0f };
 		static const float red[] = { 1.0f, 0.0f, 0.0f };
 
-		Renderer::BeginScene(Environment(), m_Camera.get(), m_Shader.get());
+		RenderCommand::EnableDepthTest(m_DepthTest);
+		Renderer::BeginScene(m_Camera.get(), m_Shader.get(), m_Layout);
 		
 		m_Shader->Activate();
 		m_UniformBuffer->Bind();
@@ -157,7 +161,10 @@ public:
 		Renderer::EndScene();
 	}
 
+	bool m_DepthTest;
+
 	virtual void OnImGuiRender() override {
+		ImGui::Checkbox("Depth Test", &m_DepthTest);
 	}
 };
 

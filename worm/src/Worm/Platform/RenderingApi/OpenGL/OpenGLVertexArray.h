@@ -22,9 +22,12 @@ namespace Worm{
         virtual void SetIndexBuffer(Shared<IndexBuffer> buffer) override;
         virtual void DetachVertexBuffers() override;
         virtual const Shared<IndexBuffer>& GetIndexBuffer() const override;
+
+        virtual void SetBufferLayout(BufferLayout layout) override;
     private:
         unsigned int m_ID;
 
+        BufferLayout m_Layout;
         std::vector<Shared<VertexBuffer>> m_VertexBuffers;
         Shared<IndexBuffer> m_IndexBuffer;
 

@@ -8,14 +8,21 @@ namespace Worm {
 
 	RenderingFrame Renderer::s_ActiveFrame;
 	RenderingBatch Renderer::s_Batch;
+	BatchInformation Renderer::s_CurrentBatchInformation;
 	Camera* Renderer::s_ActiveCamera = nullptr;
 	Shader* Renderer::s_ActiveShader = nullptr;
 
 	// ##### SCENE CONTROLS FUNTIONS #####
 
-	void Renderer::BeginScene(Environment env, Camera* camera, Shader* shader)
+	void Renderer::BeginScene(Camera* camera, Shader* shader, BufferLayout layout)
 	{
-		s_Batch.Begin();
+		// Create batch information object to send trough the batch begin method
+		s_CurrentBatchInformation = {
+			layout
+		};
+
+		s_Batch.Begin(s_CurrentBatchInformation);
+		
 		s_ActiveCamera = camera;
 		s_ActiveShader = shader;
 	}
@@ -36,9 +43,10 @@ namespace Worm {
 		if (s_Batch.GetUsedSize() != 0) {
 			RenderCommand::RenderIndexed(s_Batch.GetVertexArray());
 
-			if (clearBatch) s_Batch.Clear();
+			if (clearBatch) s_Batch.Begin(s_CurrentBatchInformation);
 		}
 	}
+
 
 	// ##### RENDERING OBJECTS FUNCTIONS ######
 
@@ -70,7 +78,12 @@ namespace Worm {
 
 		SetActiveRenderingFrame(RenderingFrame());
 
+		RenderingAPIInformation info = RenderCommand::GetAPIInformation();
+		BatchSpecification specification{
+			info.MaxFragmentTextureSlots
+		};
+
 		s_Batch = RenderingBatch();
-		s_Batch.INIT();
+		s_Batch.INIT(specification);
 	}
 }

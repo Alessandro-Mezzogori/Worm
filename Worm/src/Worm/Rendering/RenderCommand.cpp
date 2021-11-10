@@ -2,7 +2,7 @@
 #include "RenderCommand.h"
 
 namespace Worm {
-	const RenderingAPI* RenderCommand::s_RenderingAPI = nullptr;
+	RenderingAPI* RenderCommand::s_RenderingAPI = nullptr;
 
 	// Global initialization functions
 	void RenderCommand::INIT() {
@@ -10,5 +10,6 @@ namespace Worm {
 
 		// Setup Global values for the rendering api (ex. enableing scissors )
 		s_RenderingAPI->EnableScissors(true);
+		s_RenderingAPI->EnableDepthTest(true);
 	}
 }

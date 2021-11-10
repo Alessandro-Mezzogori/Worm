@@ -14,7 +14,7 @@ namespace Worm {
     /*
     * Returns a pointer to the requested RenderingAPI
     */
-    const RenderingAPI* RenderingAPIController::GetAPIimpl()
+    RenderingAPI* RenderingAPIController::GetAPIimpl()
     {
         return s_LoadedAPI.get();
     }

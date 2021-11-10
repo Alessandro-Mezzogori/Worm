@@ -5,26 +5,19 @@
 #include "VertexArray.h"
 
 namespace Worm {
+	struct BatchSpecification {
+		int32_t MaxFragmentTextureSlots;
+	};
+
+	struct BatchInformation {
+		BufferLayout VerticesLayout;	// Batch Vertex Layout information
+	};
+
 	struct RenderingBatchElement {
-		void* Data;
-		uint32_t* Indices;
-		size_t Size;
-		size_t IndicesCount;
-
-		BufferLayout Layout;
-
-		RenderingBatchElement(void* data, uint32_t* indices, size_t size, size_t indicesCount, BufferLayout layout) :
-			Data(data), Indices(indices), Size(size), IndicesCount(indicesCount), Layout(layout)
-		{
-		}
-
-		RenderingBatchElement() {
-			Data = nullptr;
-			Indices = nullptr;
-			Size = 0;
-			IndicesCount = 0;
-			Layout = BufferLayout();
-		}
+		void* Data;				// Contains the data to be copied inside the temporary vertex batching buffer
+		uint32_t* Indices;		// Contains the indices to be copied inside the temporary index batching buffer
+		size_t Size;			// Size of Data
+		size_t IndicesCount;	// Number of indices inside Indices
 	};
 
 	class RenderingBatch {
@@ -32,16 +25,15 @@ namespace Worm {
 		RenderingBatch();
 		~RenderingBatch() = default;
 
-		void INIT();
+		void INIT(BatchSpecification specification);
 		void Clear();
 
-		void Begin();
+		void Begin(BatchInformation info);
 		void End();
 
 		void AddData(RenderingBatchElement element);
 		bool HasSpace(RenderingBatchElement element) const;
 
-		void SetBufferLayout(const BufferLayout& layout);
 		const VertexArray& GetVertexArray() const;
 
 		inline size_t GetMaximumSize() const;
@@ -54,7 +46,7 @@ namespace Worm {
 
 		size_t m_MaxBatchSize;
 		size_t m_MaxIndicesCount;
-		size_t m_MaxTextureSlots; // queried from driver on init
+		size_t m_MaxTextureSlots; 
 
 		size_t m_VertexSize;
 
@@ -64,8 +56,7 @@ namespace Worm {
 		std::vector<char> m_Data;
 		std::vector<uint32_t> m_Indices;
 
-		// Control attributes
-		bool m_HasBufferLayout;
+		std::vector<uint32_t> m_Textures;
 
 		// Rendering Buffers
 		Shared<VertexBuffer> m_VertexBuffer;

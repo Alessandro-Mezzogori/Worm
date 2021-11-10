@@ -25,9 +25,15 @@ namespace Worm {
 			s_RenderingAPI->SetViewportAndScissors(x, y, width, height); 
 		};
 
+		static void EnableDepthTest(bool value) {
+			s_RenderingAPI->EnableDepthTest(value);
+		}
+
+		inline static RenderingAPIInformation GetAPIInformation() { return s_RenderingAPI->GetInformation(); }
+
 	public:
 		static void INIT();
 	private:
-		static const RenderingAPI* s_RenderingAPI;
+		static RenderingAPI* s_RenderingAPI;
 	};
 }

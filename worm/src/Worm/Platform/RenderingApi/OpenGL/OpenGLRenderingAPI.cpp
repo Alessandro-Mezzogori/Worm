@@ -13,6 +13,11 @@ namespace Worm{
 			WORM_LOG_CORE_CRITICAL("Failed to initialize GLAD");
 			return;
 		}
+
+		m_ClearBitField = GL_COLOR_BUFFER_BIT;
+
+		// Populate RenderingAPIInformation for the GetInformation() method
+		glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &m_Information.MaxFragmentTextureSlots);
 	}
 
 	void OpenGLRenderingAPI::RenderIndexed(const VertexArray& vertexArray) const
@@ -26,12 +31,13 @@ namespace Worm{
 		glClearColor(color.r, color.g, color.b, color.a);
 	}
 
+
 	void OpenGLRenderingAPI::ClearFrame() const
 	{
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear((GLbitfield) m_ClearBitField);
 	}
 
-	void OpenGLRenderingAPI::SetViewportAndScissors(float x, float y, float width, float height) const
+	void OpenGLRenderingAPI::SetViewportAndScissors(float x, float y, float width, float height)
 	{
 		const Unique<Window>& window = Application::GetWindow();
 
@@ -46,7 +52,7 @@ namespace Worm{
 		glScissor(xCoord, yCoord, vpWidth, vpHeight);
 	}
 
-	void OpenGLRenderingAPI::EnableScissors(bool value) const
+	void OpenGLRenderingAPI::EnableScissors(bool value)
 	{
 		if (value) {
 			glEnable(GL_SCISSOR_TEST);
@@ -54,6 +60,22 @@ namespace Worm{
 		else {
 			glDisable(GL_SCISSOR_TEST);
 		}
+	}
+
+	void OpenGLRenderingAPI::EnableDepthTest(bool value) {
+		if (value) {
+			glEnable(GL_DEPTH_TEST);
+			m_ClearBitField |= GL_DEPTH_BUFFER_BIT; 
+		}
+		else {
+			glDisable(GL_DEPTH_TEST);
+			m_ClearBitField &= ~(GL_DEPTH_BUFFER_BIT);
+		}
+	}
+
+	const RenderingAPIInformation& OpenGLRenderingAPI::GetInformation() const
+	{
+		return m_Information;
 	}
 }
 

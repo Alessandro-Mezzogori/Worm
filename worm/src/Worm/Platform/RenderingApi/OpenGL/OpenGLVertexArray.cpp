@@ -46,49 +46,51 @@ namespace Worm{
 	void OpenGLVertexArray::AddVertexBuffer(Shared<VertexBuffer> buffer)
 	{
 		m_VertexBuffers.push_back(buffer);
+	}
 
-		const auto& layout = buffer->GetLayout();
+	void OpenGLVertexArray::SetBufferLayout(BufferLayout layout) {
+		m_Layout = layout;
 		for (const auto& element : layout) {
 			switch (element.type)
 			{
-				case Worm::ShaderType::FLOAT:	
-				case Worm::ShaderType::FLOAT2:	
-				case Worm::ShaderType::FLOAT3:	
-				case Worm::ShaderType::FLOAT4:
-				case Worm::ShaderType::MAT3:
-				case Worm::ShaderType::MAT4:
-				{
-					glEnableVertexAttribArray(m_LayoutIndex);
-					glVertexAttribPointer(
-						m_LayoutIndex,
-						element.GetComponentNumber(),
-						ShaderTypeToOpenGL(element.type),
-						element.normalized ? GL_TRUE : GL_FALSE,
-						layout.GetStride(),
-						(const void*)(element.offset)
-					);
-					m_LayoutIndex++;
-					break;
-				}
-				case Worm::ShaderType::INT:		
-				case Worm::ShaderType::INT2:	
-				case Worm::ShaderType::INT3:	
-				case Worm::ShaderType::INT4:	
-				case Worm::ShaderType::BOOL:
-				{
-					glEnableVertexAttribArray(m_LayoutIndex);
-					glVertexAttribIPointer(
-						m_LayoutIndex,
-						element.GetComponentNumber(),
-						ShaderTypeToOpenGL(element.type),
-						layout.GetStride(),
-						(const void*)(element.offset)
-					);
-					m_LayoutIndex++;
-					break;
-				}
-				default:
-					WORM_CORE_ASSERT(false, "Unknown ShaderType");
+			case Worm::ShaderType::FLOAT:
+			case Worm::ShaderType::FLOAT2:
+			case Worm::ShaderType::FLOAT3:
+			case Worm::ShaderType::FLOAT4:
+			case Worm::ShaderType::MAT3:
+			case Worm::ShaderType::MAT4:
+			{
+				glEnableVertexAttribArray(m_LayoutIndex);
+				glVertexAttribPointer(
+					m_LayoutIndex,
+					element.GetComponentNumber(),
+					ShaderTypeToOpenGL(element.type),
+					element.normalized ? GL_TRUE : GL_FALSE,
+					layout.GetStride(),
+					(const void*)(element.offset)
+				);
+				m_LayoutIndex++;
+				break;
+			}
+			case Worm::ShaderType::INT:
+			case Worm::ShaderType::INT2:
+			case Worm::ShaderType::INT3:
+			case Worm::ShaderType::INT4:
+			case Worm::ShaderType::BOOL:
+			{
+				glEnableVertexAttribArray(m_LayoutIndex);
+				glVertexAttribIPointer(
+					m_LayoutIndex,
+					element.GetComponentNumber(),
+					ShaderTypeToOpenGL(element.type),
+					layout.GetStride(),
+					(const void*)(element.offset)
+				);
+				m_LayoutIndex++;
+				break;
+			}
+			default:
+				WORM_CORE_ASSERT(false, "Unknown ShaderType");
 			}
 		}
 	}

@@ -41,12 +41,21 @@ namespace Worm{
 	{
 	}
 
-	void VulkanRenderingAPI::SetViewportAndScissors(float x, float y, float width, float height) const
+	void VulkanRenderingAPI::SetViewportAndScissors(float x, float y, float width, float height)
 	{
 	}
 
-	void VulkanRenderingAPI::EnableScissors(bool value) const
+	void VulkanRenderingAPI::EnableScissors(bool value)
 	{
+	}
+
+	void VulkanRenderingAPI::EnableDepthTest(bool value)
+	{
+	}
+
+	const RenderingAPIInformation& VulkanRenderingAPI::GetInformation() const
+	{
+		return RenderingAPIInformation();
 	}
 
 }

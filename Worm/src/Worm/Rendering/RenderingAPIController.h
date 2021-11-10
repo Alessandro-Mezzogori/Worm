@@ -13,7 +13,7 @@ namespace Worm{
 		* Loads and returns a const reference to the requested RenderingAPI
 		* ( The ownership of the RenderingAPI object is of the Controller )
 		*/
-		static const RenderingAPI* GetAPIimpl();
+		static RenderingAPI* GetAPIimpl();
 		static RenderingAPI::API GetAPI();
 		static void LoadAPI(RenderingAPI::API api);
 		static void INIT();

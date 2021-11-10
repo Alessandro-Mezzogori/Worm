@@ -15,11 +15,8 @@ namespace Worm{
 
 		virtual void Clear() override;
 
-		virtual void SetLayout(const BufferLayout& layout) override;
-		virtual const BufferLayout& GetLayout() const override;
 	private:
 		unsigned int m_ID;
-		BufferLayout m_BufferLayout;
 		bool m_Allocated;
 		size_t m_AllocatedSize;
 	};

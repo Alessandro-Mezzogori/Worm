@@ -30,7 +30,7 @@ namespace Worm {
 
 	class Renderer {
 	public:
-		static void BeginScene(Environment env, Camera* camera, Shader* shader);
+		static void BeginScene(Camera* camera, Shader* shader, BufferLayout layout);
 		static void EndScene();
 		
 		static void Submit(RenderingBatchElement element);
@@ -47,7 +47,8 @@ namespace Worm {
 
 		static Camera* s_ActiveCamera;
 		static Shader* s_ActiveShader;
-		
+		static BatchInformation s_CurrentBatchInformation;
+
 		static constexpr const char* s_CameraMatrixUniformName = "u_CameraMatrix";
 	};
 }

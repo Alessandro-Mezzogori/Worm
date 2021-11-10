@@ -9,14 +9,17 @@ namespace Worm{
     {
     }
 
-    void RenderingBatch::INIT()
+    void RenderingBatch::INIT(BatchSpecification specification)
     {
         // Set the default values for the control attributes
         m_MaxBatchSize = s_DefaultMaxBatchSize;
         m_MaxIndicesCount = s_DefaultMaxIndicesCount;
 
         m_VertexSize = 0;
-        m_HasBufferLayout = false;
+        
+        // Texture Batching 
+        m_MaxTextureSlots = specification.MaxFragmentTextureSlots;
+        m_Textures = std::vector<uint32_t>(m_MaxTextureSlots);
 
         // Allocate memory for the batching on ram
         m_Data = std::vector<char>(m_MaxBatchSize);
@@ -37,12 +40,18 @@ namespace Worm{
         m_IndexBuffer->Bind();
         m_IndexBuffer->Allocate(m_MaxIndicesCount, DrawHint::DYNAMIC); 
 
+        // Attach Vertex and index buffer to the array
         m_VertexArray->SetIndexBuffer(m_IndexBuffer);
+        m_VertexArray->AddVertexBuffer(m_VertexBuffer);
         m_VertexArray->Unbind();
     }
 
-    void RenderingBatch::Begin()
+    void RenderingBatch::Begin(BatchInformation info)
     {
+        m_VertexArray->Bind();
+        m_VertexArray->SetBufferLayout(info.VerticesLayout);
+        m_VertexSize = info.VerticesLayout.GetStride();
+
         Clear();
     }
 
@@ -60,33 +69,18 @@ namespace Worm{
         // Reset pointers to the first value
         m_DataPtr = m_Data.data();
         m_IndicesPtr = m_Indices.data();
-    }
-
-    void RenderingBatch::SetBufferLayout(const BufferLayout& layout)
-    {
-        m_VertexBuffer->SetLayout(layout);
-        m_VertexSize = layout.GetStride();
-
-        // Refresh the auto detecting attribute pointer of the vertex array with the new buffer layout
-        m_VertexArray->Bind();
-        m_VertexArray->DetachVertexBuffers();
-        m_VertexArray->AddVertexBuffer(m_VertexBuffer);
-
-        m_HasBufferLayout = true;
+        m_Textures.clear();
     }
 
     const VertexArray& RenderingBatch::GetVertexArray() const
     {
-        WORM_CORE_ASSERT(m_HasBufferLayout, "No BufferLayout has been set for the batch renderer");
         return *m_VertexArray;
     }
 
     void RenderingBatch::AddData(RenderingBatchElement element)
     {
-        if (!m_HasBufferLayout) SetBufferLayout(element.Layout);
-        
         // Save the indices
-        uint32_t correctionOffset = GetUsedSize() / m_VertexSize; // used to compensate the new position inside the vertex buffer
+        uint32_t correctionOffset = static_cast<uint32_t>(GetUsedSize() / m_VertexSize); // used to compensate the new position inside the vertex buffer
         for (size_t i = 0; i < element.IndicesCount; i++) {
             m_IndicesPtr[i] = element.Indices[i] + correctionOffset;
         }
