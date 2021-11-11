@@ -1,237 +1,285 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Worm">
-      <UniqueIdentifier>{CAAB8E7C-B6E2-8F0D-5FCF-75104BE50B0F}</UniqueIdentifier>
+    <Filter Include="src">
+      <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Worm\Core">
-      <UniqueIdentifier>{62BE1C42-CE28-D1B8-1767-825E8310AF0D}</UniqueIdentifier>
+    <Filter Include="src\Worm">
+      <UniqueIdentifier>{41CB27CF-2D98-82DA-56B1-708242DDB768}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Worm\Core\Layers">
-      <UniqueIdentifier>{E1122772-CD0B-46C4-F63D-2B49E29525D0}</UniqueIdentifier>
+    <Filter Include="src\Worm\Core">
+      <UniqueIdentifier>{3920D781-A5E0-52B8-6E1B-9C35DA9A9794}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Worm\DataStructures">
-      <UniqueIdentifier>{37F9830C-A35A-611A-2CC8-A7CC982898D9}</UniqueIdentifier>
+    <Filter Include="src\Worm\Core\Layers">
+      <UniqueIdentifier>{D81C94D9-C4AB-1DA3-6DCA-319E59382E49}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Worm\Events">
-      <UniqueIdentifier>{6EF06741-DAA5-E036-639A-DA0DCF4ED73A}</UniqueIdentifier>
+    <Filter Include="src\Worm\DataStructures">
+      <UniqueIdentifier>{CED347DE-3A0B-9075-4315-F498AFCBB66E}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Worm\Platform">
-      <UniqueIdentifier>{5ECB4357-CA8B-BF8D-93C6-080BFF45046A}</UniqueIdentifier>
+    <Filter Include="src\Worm\Events">
+      <UniqueIdentifier>{05244259-71AF-AF1D-7AC0-3212E6CA0B1E}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Worm\Platform\OS">
-      <UniqueIdentifier>{0F49E823-FB41-0776-2474-ECFA10CCE681}</UniqueIdentifier>
+    <Filter Include="src\Worm\Platform">
+      <UniqueIdentifier>{B54079CE-2157-7764-6ACE-0286D62348EC}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Worm\Platform\OS\Windows">
-      <UniqueIdentifier>{49927961-35B7-C8E1-5E02-AE714A86C7FF}</UniqueIdentifier>
+    <Filter Include="src\Worm\Platform\OS">
+      <UniqueIdentifier>{0653558B-F2E1-DE54-9B00-F34F876EEFFA}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Worm\Platform\RenderingApi">
-      <UniqueIdentifier>{A559E110-9169-8DE1-FA22-F2FFE6517C7A}</UniqueIdentifier>
+    <Filter Include="src\Worm\Platform\OS\Windows">
+      <UniqueIdentifier>{40A3F0A9-2C5E-E055-D515-59A0C1AF2AE6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Worm\Platform\RenderingApi\OpenGL">
-      <UniqueIdentifier>{39178E35-A585-E3B4-EE6E-9EB45A1CD950}</UniqueIdentifier>
+    <Filter Include="src\Worm\Platform\RenderingApi">
+      <UniqueIdentifier>{5C846053-48AA-2ABA-31F0-AF851DB54F86}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Worm\Platform\RenderingApi\Vulkan">
-      <UniqueIdentifier>{857B4046-F1E9-95C5-3AD3-50C5A6808B61}</UniqueIdentifier>
+    <Filter Include="src\Worm\Platform\RenderingApi\OpenGL">
+      <UniqueIdentifier>{102E2983-7CF2-2773-4558-583DB1DBC3A8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Worm\Rendering">
-      <UniqueIdentifier>{97393B76-8307-2F7C-6C9B-9FA258080BE1}</UniqueIdentifier>
+    <Filter Include="src\Worm\Platform\RenderingApi\Vulkan">
+      <UniqueIdentifier>{5C92DB93-C856-DA83-91BC-0A4EFD3F76B9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Worm\Rendering">
+      <UniqueIdentifier>{CE591FD4-BA3D-E029-239E-DA7C0FA1CAAB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor">
+      <UniqueIdentifier>{B3738122-9F15-ACF8-88D0-BF4C74113349}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\stb_image">
+      <UniqueIdentifier>{0DA0BA59-F998-D9AB-22CB-BE300E23B9B7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Worm.h" />
+    <ClInclude Include="src\Worm.h">
+      <Filter>src</Filter>
+    </ClInclude>
     <ClInclude Include="src\Worm\Core\Application.h">
-      <Filter>Worm\Core</Filter>
+      <Filter>src\Worm\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Core\ApplicationLayer.h">
-      <Filter>Worm\Core</Filter>
+      <Filter>src\Worm\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Core\ApplicationLayerStack.h">
-      <Filter>Worm\Core</Filter>
+      <Filter>src\Worm\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Core\Core.h">
-      <Filter>Worm\Core</Filter>
+      <Filter>src\Worm\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Core\EntryPoint.h">
-      <Filter>Worm\Core</Filter>
+      <Filter>src\Worm\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Core\Input.h">
-      <Filter>Worm\Core</Filter>
+      <Filter>src\Worm\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Core\Layers\ImGuiLayer.h">
-      <Filter>Worm\Core\Layers</Filter>
+      <Filter>src\Worm\Core\Layers</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Core\Log.h">
-      <Filter>Worm\Core</Filter>
+      <Filter>src\Worm\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Core\Window.h">
-      <Filter>Worm\Core</Filter>
+      <Filter>src\Worm\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\DataStructures\QueueMT.h">
-      <Filter>Worm\DataStructures</Filter>
+      <Filter>src\Worm\DataStructures</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Events\ApplicationEvents.h">
-      <Filter>Worm\Events</Filter>
+      <Filter>src\Worm\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Events\Codes.h">
-      <Filter>Worm\Events</Filter>
+      <Filter>src\Worm\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Events\Event.h">
-      <Filter>Worm\Events</Filter>
+      <Filter>src\Worm\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Events\EventThread.h">
-      <Filter>Worm\Events</Filter>
+      <Filter>src\Worm\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Events\KeyEvents.h">
-      <Filter>Worm\Events</Filter>
+      <Filter>src\Worm\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Events\MouseEvents.h">
-      <Filter>Worm\Events</Filter>
+      <Filter>src\Worm\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Events\WindowEvents.h">
-      <Filter>Worm\Events</Filter>
+      <Filter>src\Worm\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Platform\OS\Windows\WindowsInput.h">
-      <Filter>Worm\Platform\OS\Windows</Filter>
+      <Filter>src\Worm\Platform\OS\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Platform\OS\Windows\WindowsWindow.h">
-      <Filter>Worm\Platform\OS\Windows</Filter>
+      <Filter>src\Worm\Platform\OS\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLBuffers.h">
-      <Filter>Worm\Platform\RenderingApi\OpenGL</Filter>
+      <Filter>src\Worm\Platform\RenderingApi\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLRenderingAPI.h">
-      <Filter>Worm\Platform\RenderingApi\OpenGL</Filter>
+      <Filter>src\Worm\Platform\RenderingApi\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLRenderingContext.h">
+      <Filter>src\Worm\Platform\RenderingApi\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLShader.h">
-      <Filter>Worm\Platform\RenderingApi\OpenGL</Filter>
+      <Filter>src\Worm\Platform\RenderingApi\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLTexture.h">
-      <Filter>Worm\Platform\RenderingApi\OpenGL</Filter>
+      <Filter>src\Worm\Platform\RenderingApi\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLUniformBuffer.h">
-      <Filter>Worm\Platform\RenderingApi\OpenGL</Filter>
+      <Filter>src\Worm\Platform\RenderingApi\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLVertexArray.h">
-      <Filter>Worm\Platform\RenderingApi\OpenGL</Filter>
+      <Filter>src\Worm\Platform\RenderingApi\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Platform\RenderingApi\Vulkan\VulkanRenderingAPI.h">
-      <Filter>Worm\Platform\RenderingApi\Vulkan</Filter>
+      <Filter>src\Worm\Platform\RenderingApi\Vulkan</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Rendering\Buffers.h">
-      <Filter>Worm\Rendering</Filter>
+      <Filter>src\Worm\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Worm\Rendering\Camera.h">
+      <Filter>src\Worm\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Rendering\Framebuffer.h">
-      <Filter>Worm\Rendering</Filter>
+      <Filter>src\Worm\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Rendering\OrthographicCamera.h">
-      <Filter>Worm\Rendering</Filter>
+      <Filter>src\Worm\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Rendering\RenderCommand.h">
-      <Filter>Worm\Rendering</Filter>
+      <Filter>src\Worm\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Worm\Rendering\RenderThread.h">
+      <Filter>src\Worm\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Rendering\Renderer.h">
-      <Filter>Worm\Rendering</Filter>
+      <Filter>src\Worm\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Rendering\RenderingAPI.h">
-      <Filter>Worm\Rendering</Filter>
+      <Filter>src\Worm\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Rendering\RenderingAPIController.h">
-      <Filter>Worm\Rendering</Filter>
+      <Filter>src\Worm\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="src\Worm\Rendering\Shader.h">
-      <Filter>Worm\Rendering</Filter>
+    <ClInclude Include="src\Worm\Rendering\RenderingBatch.h">
+      <Filter>src\Worm\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="src\Worm\Rendering\ShaderController.h">
-      <Filter>Worm\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Worm\Rendering\ShaderTypes.h">
-      <Filter>Worm\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Worm\Rendering\Texture.h">
-      <Filter>Worm\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Worm\Rendering\UniformBuffer.h">
-      <Filter>Worm\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Worm\Rendering\UniformTable.h">
-      <Filter>Worm\Rendering</Filter>
+    <ClInclude Include="src\Worm\Rendering\RenderingContext.h">
+      <Filter>src\Worm\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Rendering\RenderingPrimitives.h">
-      <Filter>Worm\Rendering</Filter>
+      <Filter>src\Worm\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Worm\Rendering\Shader.h">
+      <Filter>src\Worm\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Worm\Rendering\ShaderController.h">
+      <Filter>src\Worm\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Worm\Rendering\ShaderTypes.h">
+      <Filter>src\Worm\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Worm\Rendering\Texture.h">
+      <Filter>src\Worm\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Worm\Rendering\UniformBuffer.h">
+      <Filter>src\Worm\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Worm\Rendering\UniformTable.h">
+      <Filter>src\Worm\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\Worm\Rendering\VertexArray.h">
-      <Filter>Worm\Rendering</Filter>
+      <Filter>src\Worm\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="src\wormpch.h" />
-    <ClInclude Include="vendor\stb_image\stb_image.h" />
-    <ClInclude Include="src\Worm\Rendering\RenderThread.h" />
-    <ClInclude Include="src\Worm\Rendering\RenderingBatch.h" />
-    <ClInclude Include="src\Worm\Rendering\Camera.h" />
+    <ClInclude Include="src\wormpch.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Worm\Core\Application.cpp">
-      <Filter>Worm\Core</Filter>
+      <Filter>src\Worm\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Worm\Core\Layers\ImGuiBuild.cpp">
-      <Filter>Worm\Core\Layers</Filter>
+      <Filter>src\Worm\Core\Layers</Filter>
     </ClCompile>
     <ClCompile Include="src\Worm\Core\Layers\ImGuiLayer.cpp">
-      <Filter>Worm\Core\Layers</Filter>
+      <Filter>src\Worm\Core\Layers</Filter>
     </ClCompile>
     <ClCompile Include="src\Worm\Core\Log.cpp">
-      <Filter>Worm\Core</Filter>
+      <Filter>src\Worm\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Worm\Core\Window.cpp">
-      <Filter>Worm\Core</Filter>
+      <Filter>src\Worm\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Worm\Events\Event.cpp">
-      <Filter>Worm\Events</Filter>
+      <Filter>src\Worm\Events</Filter>
     </ClCompile>
     <ClCompile Include="src\Worm\Platform\OS\Windows\WindowsInput.cpp">
-      <Filter>Worm\Platform\OS\Windows</Filter>
+      <Filter>src\Worm\Platform\OS\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\Worm\Platform\OS\Windows\WindowsWindow.cpp">
-      <Filter>Worm\Platform\OS\Windows</Filter>
+      <Filter>src\Worm\Platform\OS\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLBuffers.cpp">
-      <Filter>Worm\Platform\RenderingApi\OpenGL</Filter>
+      <Filter>src\Worm\Platform\RenderingApi\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLRenderingAPI.cpp">
-      <Filter>Worm\Platform\RenderingApi\OpenGL</Filter>
+      <Filter>src\Worm\Platform\RenderingApi\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLRenderingContext.cpp">
+      <Filter>src\Worm\Platform\RenderingApi\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLShader.cpp">
-      <Filter>Worm\Platform\RenderingApi\OpenGL</Filter>
+      <Filter>src\Worm\Platform\RenderingApi\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLTexture.cpp">
-      <Filter>Worm\Platform\RenderingApi\OpenGL</Filter>
+      <Filter>src\Worm\Platform\RenderingApi\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLUniformBuffer.cpp">
-      <Filter>Worm\Platform\RenderingApi\OpenGL</Filter>
+      <Filter>src\Worm\Platform\RenderingApi\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLVertexArray.cpp">
-      <Filter>Worm\Platform\RenderingApi\OpenGL</Filter>
+      <Filter>src\Worm\Platform\RenderingApi\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Worm\Platform\RenderingApi\Vulkan\VulkanRenderingAPI.cpp">
-      <Filter>Worm\Platform\RenderingApi\Vulkan</Filter>
+      <Filter>src\Worm\Platform\RenderingApi\Vulkan</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Worm\Rendering\Buffers.cpp">
+      <Filter>src\Worm\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Worm\Rendering\OrthographicCamera.cpp">
+      <Filter>src\Worm\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="src\Worm\Rendering\RenderCommand.cpp">
-      <Filter>Worm\Rendering</Filter>
+      <Filter>src\Worm\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="src\Worm\Rendering\Renderer.cpp">
-      <Filter>Worm\Rendering</Filter>
+      <Filter>src\Worm\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="src\Worm\Rendering\RenderingAPIController.cpp">
-      <Filter>Worm\Rendering</Filter>
+      <Filter>src\Worm\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="src\wormpch.cpp" />
-    <ClCompile Include="src\Worm\Rendering\Texture.cpp" />
-    <ClCompile Include="vendor\stb_image\stb_image.cpp" />
-    <ClCompile Include="src\Worm\Rendering\Buffers.cpp" />
-    <ClCompile Include="src\Worm\Rendering\Shader.cpp" />
-    <ClCompile Include="src\Worm\Rendering\UniformBuffer.cpp" />
-    <ClCompile Include="src\Worm\Rendering\VertexArray.cpp" />
-    <ClCompile Include="src\Worm\Rendering\RenderingBatch.cpp" />
-    <ClCompile Include="src\Worm\Rendering\OrthographicCamera.cpp" />
+    <ClCompile Include="src\Worm\Rendering\RenderingBatch.cpp">
+      <Filter>src\Worm\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Worm\Rendering\RenderingContext.cpp">
+      <Filter>src\Worm\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Worm\Rendering\Shader.cpp">
+      <Filter>src\Worm\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Worm\Rendering\Texture.cpp">
+      <Filter>src\Worm\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Worm\Rendering\UniformBuffer.cpp">
+      <Filter>src\Worm\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Worm\Rendering\VertexArray.cpp">
+      <Filter>src\Worm\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\wormpch.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\stb_image\stb_image.cpp">
+      <Filter>vendor\stb_image</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

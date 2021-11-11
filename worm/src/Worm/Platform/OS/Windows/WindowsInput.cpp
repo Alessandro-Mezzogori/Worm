@@ -7,12 +7,12 @@
 
 bool Worm::Platform::WindowsInput::IsKeyPressed(int keycode) const
 {
-    return glfwGetKey((GLFWwindow*)Application::GetWindow()->GetNativeWindow(), keycode) == GL_TRUE ? true : false;
+    return glfwGetKey((GLFWwindow*)Application::GetWindow()->GetNativeWindow(), keycode) == GLFW_PRESS;
 }
 
 bool Worm::Platform::WindowsInput::IsMouseButtonPressed(int button) const
 {
-    return glfwGetMouseButton((GLFWwindow*)Application::GetWindow()->GetNativeWindow(), button) == GL_TRUE ? true : false;
+    return glfwGetMouseButton((GLFWwindow*)Application::GetWindow()->GetNativeWindow(), button) == GLFW_PRESS;
 }
 
 std::pair<double, double> Worm::Platform::WindowsInput::GetMousePosition() const

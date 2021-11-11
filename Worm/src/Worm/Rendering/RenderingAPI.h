@@ -30,6 +30,6 @@ namespace Worm {
 		virtual void EnableScissors(bool value) = 0;
 		virtual void EnableDepthTest(bool value) = 0;
 
-		virtual const RenderingAPIInformation& GetInformation() const = 0;
+		virtual const RenderingAPIInformation& GetInformation() = 0;
 	};
 }

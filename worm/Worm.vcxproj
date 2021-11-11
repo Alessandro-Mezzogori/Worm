@@ -76,7 +76,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>wormpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>WORM_PLATFORM_WINDOWS;WORM_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WORM_PLATFORM_WINDOWS;GLFW_INCLUDE_NONE;WORM_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;vendor\spirv-cross;$(VULKAN_SDK)\Include;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
@@ -97,7 +97,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>wormpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>WORM_PLATFORM_WINDOWS;WORM_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WORM_PLATFORM_WINDOWS;GLFW_INCLUDE_NONE;WORM_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;vendor\spirv-cross;$(VULKAN_SDK)\Include;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -122,7 +122,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>wormpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>WORM_PLATFORM_WINDOWS;WORM_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WORM_PLATFORM_WINDOWS;GLFW_INCLUDE_NONE;WORM_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;vendor\spirv-cross;$(VULKAN_SDK)\Include;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -165,6 +165,7 @@
     <ClInclude Include="src\Worm\Platform\OS\Windows\WindowsWindow.h" />
     <ClInclude Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLBuffers.h" />
     <ClInclude Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLRenderingAPI.h" />
+    <ClInclude Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLRenderingContext.h" />
     <ClInclude Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLShader.h" />
     <ClInclude Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLTexture.h" />
     <ClInclude Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLUniformBuffer.h" />
@@ -175,21 +176,21 @@
     <ClInclude Include="src\Worm\Rendering\Framebuffer.h" />
     <ClInclude Include="src\Worm\Rendering\OrthographicCamera.h" />
     <ClInclude Include="src\Worm\Rendering\RenderCommand.h" />
+    <ClInclude Include="src\Worm\Rendering\RenderThread.h" />
     <ClInclude Include="src\Worm\Rendering\Renderer.h" />
-    <ClInclude Include="src\Worm\Rendering\RenderingBatch.h" />
     <ClInclude Include="src\Worm\Rendering\RenderingAPI.h" />
     <ClInclude Include="src\Worm\Rendering\RenderingAPIController.h" />
-    <ClInclude Include="src\Worm\Rendering\RenderThread.h" />
+    <ClInclude Include="src\Worm\Rendering\RenderingBatch.h" />
+    <ClInclude Include="src\Worm\Rendering\RenderingContext.h" />
+    <ClInclude Include="src\Worm\Rendering\RenderingPrimitives.h" />
     <ClInclude Include="src\Worm\Rendering\Shader.h" />
     <ClInclude Include="src\Worm\Rendering\ShaderController.h" />
     <ClInclude Include="src\Worm\Rendering\ShaderTypes.h" />
     <ClInclude Include="src\Worm\Rendering\Texture.h" />
     <ClInclude Include="src\Worm\Rendering\UniformBuffer.h" />
     <ClInclude Include="src\Worm\Rendering\UniformTable.h" />
-    <ClInclude Include="src\Worm\Rendering\RenderingPrimitives.h" />
     <ClInclude Include="src\Worm\Rendering\VertexArray.h" />
     <ClInclude Include="src\wormpch.h" />
-    <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Worm\Core\Application.cpp" />
@@ -202,6 +203,7 @@
     <ClCompile Include="src\Worm\Platform\OS\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLBuffers.cpp" />
     <ClCompile Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLRenderingAPI.cpp" />
+    <ClCompile Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLRenderingContext.cpp" />
     <ClCompile Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLShader.cpp" />
     <ClCompile Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLTexture.cpp" />
     <ClCompile Include="src\Worm\Platform\RenderingApi\OpenGL\OpenGLUniformBuffer.cpp" />
@@ -211,15 +213,16 @@
     <ClCompile Include="src\Worm\Rendering\OrthographicCamera.cpp" />
     <ClCompile Include="src\Worm\Rendering\RenderCommand.cpp" />
     <ClCompile Include="src\Worm\Rendering\Renderer.cpp" />
-    <ClCompile Include="src\Worm\Rendering\RenderingBatch.cpp" />
     <ClCompile Include="src\Worm\Rendering\RenderingAPIController.cpp" />
-    <ClCompile Include="src\wormpch.cpp">
-      <PrecompiledHeader>Create</PrecompiledHeader>
-    </ClCompile>
+    <ClCompile Include="src\Worm\Rendering\RenderingBatch.cpp" />
+    <ClCompile Include="src\Worm\Rendering\RenderingContext.cpp" />
     <ClCompile Include="src\Worm\Rendering\Shader.cpp" />
     <ClCompile Include="src\Worm\Rendering\Texture.cpp" />
     <ClCompile Include="src\Worm\Rendering\UniformBuffer.cpp" />
     <ClCompile Include="src\Worm\Rendering\VertexArray.cpp" />
+    <ClCompile Include="src\wormpch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="vendor\stb_image\stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -36,8 +36,6 @@ namespace Worm{
 
     void OrtographicCamera::ComputeViewMatrix()
     {
-        WORM_LOG_CORE_DEBUG("Camera Direction: {0} {1} {2}", m_LookingDirection.x, m_LookingDirection.y, m_LookingDirection.z);
-        WORM_LOG_CORE_DEBUG("Camera Position: {0} {1} {2}", m_Position.x, m_Position.y, m_Position.z);
         m_ViewMatrix = glm::lookAt(m_Position, m_Position + m_LookingDirection, s_Up);
     }
 

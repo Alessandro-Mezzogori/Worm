@@ -10,7 +10,7 @@
 #include "Worm/Events/KeyEvents.h"
 
 namespace Worm::Platform {
-	static bool s_GLFWInitialized = false;
+	uint8_t WindowsWindow::s_GLFWWindowCount = 0;
 	
 	static void glfwErrorCallback(int error, const char* description) {
 		WORM_LOG_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
@@ -29,6 +29,7 @@ namespace Worm::Platform {
 	void WindowsWindow::Shutdown()
 	{
 		glfwDestroyWindow(m_Window);
+		s_GLFWWindowCount--;
 	}
 
 	void WindowsWindow::Init(const WindowProperties& props)
@@ -39,20 +40,20 @@ namespace Worm::Platform {
 
 		WORM_LOG_CORE_INFO("Creating Window {0} Width: {1} Height {2}", m_Data.Title, m_Data.Width, m_Data.Height);
 
-		// Temporary
-		if (!s_GLFWInitialized)
+		if (s_GLFWWindowCount == 0)
 		{
 			// TODO glfw terminate on system shutdown
 			int success = glfwInit();
 			
 			WORM_CORE_ASSERT(success == GLFW_TRUE, "Could not initialize GLFW");
 			glfwSetErrorCallback(Worm::Platform::glfwErrorCallback);
-			s_GLFWInitialized = true;
 		}
 
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
+		s_GLFWWindowCount++;
 
-		glfwMakeContextCurrent(m_Window);
+		m_Context = RenderingContext::Create(m_Window);
+		m_Context->INIT();
 
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
@@ -130,7 +131,7 @@ namespace Worm::Platform {
 		glfwSetCursorEnterCallback(m_Window, [](GLFWwindow* window, int entered) {
 			WindowData* data = (WindowData*)glfwGetWindowUserPointer(window);
 
-			if (entered == GL_TRUE) {
+			if (entered == GLFW_TRUE) {
 				data->EventCallback(std::shared_ptr<BaseEvent>(new CursorEnterEvent()));
 			}
 			else {
@@ -147,7 +148,7 @@ namespace Worm::Platform {
 		glfwSetWindowFocusCallback(m_Window, [](GLFWwindow* window, int focused) {
 			WindowData* data = (WindowData*)glfwGetWindowUserPointer(window);
 		
-			if (focused == GL_TRUE)
+			if (focused == GLFW_TRUE)
 			{
 				data->EventCallback(std::shared_ptr<BaseEvent>(new WindowFocusedEvent()));
 			}
@@ -164,7 +165,7 @@ namespace Worm::Platform {
 		glfwSetWindowIconifyCallback(m_Window, [](GLFWwindow* window, int iconify) {
 			WindowData* data = (WindowData*)glfwGetWindowUserPointer(window);
 
-			if (iconify == GL_TRUE)
+			if (iconify == GLFW_TRUE)
 			{
 				data->EventCallback(std::shared_ptr<BaseEvent>(new WindowMinimizedEvent()));
 			}
@@ -181,7 +182,7 @@ namespace Worm::Platform {
 		glfwSetWindowMaximizeCallback(m_Window, [](GLFWwindow* window, int maximized) {
 			WindowData* data = (WindowData*)glfwGetWindowUserPointer(window);
 
-			if (maximized == GL_TRUE)
+			if (maximized == GLFW_TRUE)
 			{
 				WindowMaximizedEvent event;
 				data->EventCallback(std::shared_ptr<BaseEvent>(new WindowMaximizedEvent()));
@@ -215,7 +216,7 @@ namespace Worm::Platform {
 	void WindowsWindow::OnUpdate()
 	{
 		glfwPollEvents();
-		glfwSwapBuffers(m_Window);
+		m_Context->SwapBuffers();
 	}
 
 	void WindowsWindow::SetVSync(bool enabled)

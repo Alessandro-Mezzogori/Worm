@@ -4,6 +4,8 @@
 
 #include "Worm/Platform/OS/Windows/WindowsInput.h"
 
+#include "Worm/Rendering/RenderingContext.h"
+
 #include "GLFW/glfw3.h"
 
 namespace Worm::Platform {
@@ -38,6 +40,9 @@ namespace Worm::Platform {
 		GLFWwindow* m_Window;
 		WindowData m_Data;
 
-		std::unique_ptr<WindowsInput> m_Input;
+		Unique<RenderingContext> m_Context;
+		Unique<WindowsInput> m_Input;
+
+		static uint8_t s_GLFWWindowCount;
 	};
 }

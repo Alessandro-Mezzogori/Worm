@@ -13,7 +13,7 @@ namespace Worm {
 		
 		virtual void EnableScissors(bool value) override;
 		virtual void EnableDepthTest(bool value) override;
-		virtual const RenderingAPIInformation& GetInformation() const override;
+		virtual const RenderingAPIInformation& GetInformation() override;
 	private:
 		bool m_IsLoadedInformation;
 		RenderingAPIInformation m_Information;

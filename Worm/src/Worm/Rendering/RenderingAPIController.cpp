@@ -7,7 +7,7 @@
 namespace Worm {
     // ##### STATIC INITIALIZATION/DECLARATION #####
 
-    RenderingAPI::API RenderingAPIController::s_LoadedAPItype = RenderingAPI::API::NONE;
+    RenderingAPI::API RenderingAPIController::s_LoadedAPItype = RenderingAPI::API::DEFAULT; // TODO 
     Unique<RenderingAPI> RenderingAPIController::s_LoadedAPI = nullptr;
     // ##### PUBLIC METHODS #####
 

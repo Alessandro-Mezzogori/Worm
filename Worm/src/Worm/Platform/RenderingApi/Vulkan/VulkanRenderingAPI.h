@@ -17,7 +17,7 @@ namespace Worm{
 		virtual void EnableScissors(bool value) override;
 		virtual void EnableDepthTest(bool value) override;
 
-		virtual const RenderingAPIInformation& GetInformation() const override;
+		virtual const RenderingAPIInformation& GetInformation() override;
 	private:
 		VkInstance m_Instance;
 	};

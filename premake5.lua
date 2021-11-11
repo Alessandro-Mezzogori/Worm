@@ -15,14 +15,13 @@ outputdir = "%{cfg.buildcgf}-%{cfg.system}-%{cfg.architecture}"
 MainProjectName = "Worm"
 
 IncludeDirs = {}
-IncludeDirs["spdlog"] = MainProjectName .. "/vendor/spdlog/include"
-IncludeDirs["GLFW"] = MainProjectName .. "/vendor/GLFW/include"
-IncludeDirs["Glad"] = MainProjectName .. "/vendor/Glad/include"
-IncludeDirs["ImGui"] = MainProjectName .. "/vendor/imgui"
-IncludeDirs["glm"] = MainProjectName .. "/vendor/glm"
-IncludeDirs["spirv_cross"] = MainProjectName .. "/vendor/spirv-cross"
-IncludeDirs["stb_image"] = MainProjectName .. "/vendor/stb_image"
---IncludeDirs["vulkan"] = "C:/VulkanSDK/1.2.170.0/Include"
+IncludeDirs["spdlog"] = "%{prj.name}/vendor/spdlog/include"
+IncludeDirs["GLFW"] =  "%{prj.name}/vendor/GLFW/include"
+IncludeDirs["Glad"] =  "%{prj.name}/vendor/Glad/include"
+IncludeDirs["ImGui"] =  "%{prj.name}/vendor/imgui"
+IncludeDirs["glm"] =  "Worm/vendor/glm"
+IncludeDirs["spirv_cross"] = "%{prj.name}/vendor/spirv-cross"
+IncludeDirs["stb_image"] =  "%{prj.name}/vendor/stb_image"
 IncludeDirs["vulkan"] = "$(VULKAN_SDK)/Include"
 
 LibDirs = {}
@@ -55,7 +54,8 @@ project "Worm"
     files
     {
             "%{prj.name}/src/**.h",
-            "%{prj.name}/src/**.cpp"
+            "%{prj.name}/src/**.cpp",
+            "%{IncludeDirs.stb_image}/stb_image.cpp" -- include stb_image.cpp
     }
 
     includedirs
@@ -90,7 +90,8 @@ project "Worm"
 
         defines
         {
-            "WORM_PLATFORM_WINDOWS"
+            "WORM_PLATFORM_WINDOWS",
+            "GLFW_INCLUDE_NONE"
         }
 
 

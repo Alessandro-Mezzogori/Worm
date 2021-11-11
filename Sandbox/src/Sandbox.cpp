@@ -146,7 +146,7 @@ public:
 		// Not working because it is executed on a different thread
 		// OpenGL has a different context for each execution thread
 		// find a way to influence the change in the viewport from this thread
-		//RenderCommand::SetViewport(0.0f, 0.0f, 1.0f, 1.0f);
+		// RenderCommand::SetViewport(0.0f, 0.0f, 1.0f, 1.0f);
 		return true;
 	}
 

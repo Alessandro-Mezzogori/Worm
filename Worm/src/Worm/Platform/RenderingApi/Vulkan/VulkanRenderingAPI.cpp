@@ -53,7 +53,7 @@ namespace Worm{
 	{
 	}
 
-	const RenderingAPIInformation& VulkanRenderingAPI::GetInformation() const
+	const RenderingAPIInformation& VulkanRenderingAPI::GetInformation()
 	{
 		return RenderingAPIInformation();
 	}

@@ -8,16 +8,7 @@
 
 namespace Worm{
 	void OpenGLRenderingAPI::Init() {
-		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-		{
-			WORM_LOG_CORE_CRITICAL("Failed to initialize GLAD");
-			return;
-		}
-
 		m_ClearBitField = GL_COLOR_BUFFER_BIT;
-
-		// Populate RenderingAPIInformation for the GetInformation() method
-		glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &m_Information.MaxFragmentTextureSlots);
 	}
 
 	void OpenGLRenderingAPI::RenderIndexed(const VertexArray& vertexArray) const
@@ -74,8 +65,14 @@ namespace Worm{
 		}
 	}
 
-	const RenderingAPIInformation& OpenGLRenderingAPI::GetInformation() const
+	const RenderingAPIInformation& OpenGLRenderingAPI::GetInformation() 
 	{
+		if (!m_IsLoadedInformation) {
+			// Populate RenderingAPIInformation for the GetInformation() method
+			glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &m_Information.MaxFragmentTextureSlots);
+			m_IsLoadedInformation = true;
+		}
+
 		return m_Information;
 	}
 }

@@ -10,7 +10,6 @@ namespace Worm {
 	Application::Application()
 	{
 		WORM_CORE_ASSERT(s_Instance == nullptr, "An Instance of application already exists");
-
 		s_Instance = this;
 
 		m_Running = true;
